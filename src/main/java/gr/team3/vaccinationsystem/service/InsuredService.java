@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /*
 This class represents the service for all the insured people.
@@ -22,7 +23,17 @@ public class InsuredService {
     //creates new Insured object and adds it to the list
     public void createInsured(String afm, String amka, String name, String surname, LocalDate birthdate, String email)
     {
-        insuredList.add(new Insured(afm, amka ,name, surname,birthdate, email ));
+        Pattern amkaPattern = Pattern.compile("\\d{11}");
+        if(getInsuredByAmka(amka)== null){
+            if(amkaPattern.matcher(amka).matches()){
+                insuredList.add(new Insured(afm, amka ,name, surname,birthdate, email ));
+                System.out.println("Insured created!");
+            }else{
+                System.out.println("Amka is not valid");
+            }
+
+        }
+
     }
 
     //Returns the list with all the insured people.
