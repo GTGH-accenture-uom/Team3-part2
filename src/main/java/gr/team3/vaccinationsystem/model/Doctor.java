@@ -1,4 +1,4 @@
-package org.example.model;
+package gr.team3.vaccinationsystem.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

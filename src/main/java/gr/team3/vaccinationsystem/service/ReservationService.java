@@ -1,6 +1,7 @@
-package org.example.service;
+package gr.team3.vaccinationsystem.service;
 
-import org.example.model.*;
+
+import gr.team3.vaccinationsystem.model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

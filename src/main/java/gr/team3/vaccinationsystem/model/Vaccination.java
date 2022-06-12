@@ -1,7 +1,4 @@
-package org.example.model;
-
-import org.example.model.Doctor;
-import org.example.model.Insured;
+package gr.team3.vaccinationsystem.model;
 
 import java.time.LocalDate;
 

@@ -1,8 +1,7 @@
-package org.example.service;
+package gr.team3.vaccinationsystem.service;
 
-import org.example.model.Timeslot;
+import gr.team3.vaccinationsystem.model.Timeslot;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 

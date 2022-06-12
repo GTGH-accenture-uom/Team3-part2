@@ -1,9 +1,10 @@
-package org.example.model;
+package gr.team3.vaccinationsystem.model;
 
 import javax.print.Doc;
 import java.util.ArrayList;
 
 public class Reservation {
+
     Insured insuredPerson;
     Timeslot timeslot;
     Boolean isDone = false;

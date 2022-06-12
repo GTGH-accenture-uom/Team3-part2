@@ -1,4 +1,4 @@
-package org.example.model;
+package gr.team3.vaccinationsystem.model;
 
 import java.sql.Time;
 import java.util.ArrayList;

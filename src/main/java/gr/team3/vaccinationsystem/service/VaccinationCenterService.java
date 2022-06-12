@@ -1,13 +1,13 @@
 
-package org.example.service;
+package gr.team3.vaccinationsystem.service;
+
+import gr.team3.vaccinationsystem.model.Timeslot;
+import gr.team3.vaccinationsystem.model.VaccinationCenter;
 
 import java.time.temporal.JulianFields;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.example.model.Insured;
-import org.example.model.Timeslot;
-import org.example.model.VaccinationCenter;
 
 /*
 This class represents the service for all the vaccination centers.
