@@ -15,7 +15,7 @@ such as the creation of an insured person.
  */
 public class InsuredService {
 
-   private List<Insured> insuredList = new ArrayList<Insured>();
+   private static List<Insured> insuredList = new ArrayList<Insured>();
 
     //creates new Insured object and adds it to the list
     public void createInsured(String afm, String amka, String name, String surname, LocalDate birthdate, String email)
@@ -29,11 +29,10 @@ public class InsuredService {
         return insuredList;
     }
 
-    public Insured getInsuredByAmka(String s) {
-        for (Insured insured:insuredList) {
+    public static Insured getInsuredByAmka(String s) {
+        for (Insured insured: InsuredService.insuredList) {
             if (insured.getAmka().equals(s))
                 return insured;
-
         }
         return null;
     }
@@ -71,17 +70,21 @@ public class InsuredService {
     }
 
     //Checks and prints if the insured person's vaccination coverage has expired
-    // or not depending on the vaccination they had.
-    public void checkHasCoverage(Insured insured){
-        for(Vaccination vaccination1 : VaccinationService.getVaccinationslist() )
-        {
-            if (vaccination1.getInsuredPerson().equals(insured) && (vaccination1.getExpirationDate().isAfter(LocalDate.now()))){
-                System.out.println("Your vaccination certificate is still valid!");
-            }
-            else {
-                System.out.println("Your vaccination coverage has expired!");
-            }
-        }
-    }
+    //or not  and the expiration date depending on the vaccination they had.It
+    //also checks and prints if the insured has a vaccination record
+    public static String checkHasCoverage(Insured insured) {
+        for (Vaccination vaccination1 : VaccinationService.getVaccinationslist()) {
+            if (vaccination1.getInsuredPerson().equals(insured)){
 
+                if ((vaccination1.getExpirationDate().isAfter(LocalDate.now()))) {
+                    return ("Your vaccination certificate is still valid! It expires at" + vaccination1.getExpirationDate());
+
+                } else
+                    return "Your vaccination coverage has expired!";
+            }
+            else
+                return "No vaccination record found";
+        }
+        return null;
+    }
 }

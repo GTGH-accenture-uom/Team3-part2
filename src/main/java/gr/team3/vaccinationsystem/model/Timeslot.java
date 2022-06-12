@@ -1,13 +1,12 @@
 package gr.team3.vaccinationsystem.model;
 
-
 import java.time.LocalDate;
 
 public class Timeslot {
 
-    private int day;
-    private int month;
-    private int year;
+    private static int day;
+    private static int month;
+    private static int year;
     private int hour;
     private int minutes;
     private int startMinute;
@@ -29,9 +28,9 @@ public class Timeslot {
         isFree = true;
     }
 
-    public int getDay() {return day;}
-    public int getMonth() {return month;}
-    public int getYear() {return year;}
+    public static int getDay(int day) {return day;}
+    public static int getMonth(int month) {return Timeslot.month;}
+    public static int getYear(int year) {return year;}
     public int getHour() {return hour;}
     public int getMinutes() {return minutes;}
     public int getStartMinute() {return startMinute;}
@@ -72,4 +71,5 @@ public class Timeslot {
         return LocalDate.of(year,month,day);
 
     }
+
 }
