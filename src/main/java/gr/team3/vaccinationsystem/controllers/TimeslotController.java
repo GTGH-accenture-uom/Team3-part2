@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 public class TimeslotController {
 
+    /*
     //Search timeslots by day
     @GetMapping("/SearchTimeslot")
     public List<Timeslot> SearchTimeslotByDayByMonthByYear(@RequestParam int day,
@@ -29,4 +30,6 @@ public class TimeslotController {
                                                       @RequestParam int year){
         return  TimeslotService.getFreeTimeslotsByMonthByYear(month,year);
     }
+
+     */
 }

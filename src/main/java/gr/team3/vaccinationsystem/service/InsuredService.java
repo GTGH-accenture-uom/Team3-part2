@@ -3,6 +3,7 @@ package gr.team3.vaccinationsystem.service;
 import gr.team3.vaccinationsystem.model.Insured;
 import gr.team3.vaccinationsystem.model.Reservation;
 import gr.team3.vaccinationsystem.model.Vaccination;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ This class represents the service for all the insured people.
 It contains a list of all the insured people, and some needed methods
 such as the creation of an insured person.
  */
+@Service
 public class InsuredService {
 
    private static List<Insured> insuredList = new ArrayList<Insured>();

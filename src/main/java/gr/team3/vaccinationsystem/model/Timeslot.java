@@ -1,7 +1,10 @@
 package gr.team3.vaccinationsystem.model;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 
+@Component
 public class Timeslot {
 
     private static int day;
@@ -26,6 +29,9 @@ public class Timeslot {
         this.endMinute = endMinute;
         this.doctor = doctor;
         isFree = true;
+    }
+
+    public Timeslot() {
     }
 
     public static int getDay(int day) {return day;}

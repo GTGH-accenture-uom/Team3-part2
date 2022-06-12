@@ -2,7 +2,9 @@ package gr.team3.vaccinationsystem.service;
 
 import gr.team3.vaccinationsystem.model.Insured;
 import gr.team3.vaccinationsystem.model.Timeslot;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ This class represents the service for all the timeslots.
 It contains a list of all the timeslots, and some needed methods
 such a method to add all timeslots in the list.
  */
+@Service
 public class TimeslotService {
 
     private static List<Timeslot> timeslotList = new ArrayList<>();
@@ -55,5 +58,13 @@ public class TimeslotService {
     //This method adds all timeslots in the list
     public void addTimeslot(Timeslot timeslot){
         timeslotList.add(timeslot);
+    }
+
+    public Timeslot getTimeslotByDate(LocalDate date) {
+        for (Timeslot timeslot:timeslotList) {
+            if (timeslot.getLocalDate().equals(date))
+                return timeslot;
+        }
+        return null;
     }
 }

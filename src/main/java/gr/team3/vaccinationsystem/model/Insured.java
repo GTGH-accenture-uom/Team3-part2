@@ -1,7 +1,10 @@
 package gr.team3.vaccinationsystem.model;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 
+@Component
 public class Insured {
 
     private String afm;
@@ -18,6 +21,9 @@ public class Insured {
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
+    }
+
+    public Insured() {
     }
 
     public String getAfm() {

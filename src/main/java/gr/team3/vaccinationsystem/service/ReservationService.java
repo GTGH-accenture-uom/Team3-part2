@@ -2,6 +2,7 @@ package gr.team3.vaccinationsystem.service;
 
 
 import gr.team3.vaccinationsystem.model.*;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ This class represents the service for all the reservations.
 It contains a list of all the reservations, and some needed methods
 such as the creation of a reservation.
  */
-
+@Service
 public class ReservationService {
 
     private static List<Reservation> reservationList = new ArrayList<>();

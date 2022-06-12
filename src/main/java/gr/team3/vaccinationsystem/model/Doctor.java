@@ -1,9 +1,12 @@
 package gr.team3.vaccinationsystem.model;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class Doctor {
     private String amka;
     private String name;
@@ -25,6 +28,9 @@ public class Doctor {
         this.surname = surname;
         timeslots = new ArrayList<>();
 
+    }
+
+    public Doctor() {
     }
 
     public String getAmka() {return amka;}

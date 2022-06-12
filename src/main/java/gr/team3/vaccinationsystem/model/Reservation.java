@@ -1,8 +1,13 @@
 package gr.team3.vaccinationsystem.model;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.stereotype.Component;
+
 import javax.print.Doc;
 import java.util.ArrayList;
 
+
+@Component
 public class Reservation {
 
     Insured insuredPerson;
@@ -17,6 +22,10 @@ public class Reservation {
         this.vaccinationCenter = vaccinationCenter;
         this.doctor = doctor;
     }
+
+    public Reservation() {
+    }
+
 
     public Doctor getDoctor() {
         return doctor;

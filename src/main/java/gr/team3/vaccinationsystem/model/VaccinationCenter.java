@@ -1,9 +1,12 @@
 package gr.team3.vaccinationsystem.model;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class VaccinationCenter {
     private String code;
     private String address;
@@ -20,6 +23,9 @@ public class VaccinationCenter {
         this.code = code;
         this.address = address;
         this.timeslots = timeslots;
+    }
+
+    public VaccinationCenter() {
     }
 
     public String getCode() {

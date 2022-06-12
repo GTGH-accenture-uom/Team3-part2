@@ -1,7 +1,11 @@
 package gr.team3.vaccinationsystem.model;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 
+
+@Component
 public class Vaccination {
     Insured insuredPerson;
     Doctor doctor;
@@ -13,6 +17,9 @@ public class Vaccination {
         this.doctor = doctor;
         this.vaccinationDate = vaccinationDate;
         this.expirationDate = expirationDate;
+    }
+
+    public Vaccination() {
     }
 
     public Insured getInsuredPerson() {

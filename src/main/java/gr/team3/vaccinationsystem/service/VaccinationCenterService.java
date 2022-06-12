@@ -3,6 +3,7 @@ package gr.team3.vaccinationsystem.service;
 
 import gr.team3.vaccinationsystem.model.Timeslot;
 import gr.team3.vaccinationsystem.model.VaccinationCenter;
+import org.springframework.stereotype.Service;
 
 import java.time.temporal.JulianFields;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ This class represents the service for all the vaccination centers.
 It contains a list of all the vaccination centers, and some needed methods
 such the creation of a vaccination center.
  */
+@Service
 public class VaccinationCenterService {
     private List<VaccinationCenter> vaccinationCenterList = new ArrayList();
 
