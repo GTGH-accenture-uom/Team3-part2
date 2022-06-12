@@ -32,7 +32,7 @@ public class ReservationController {
                                     @RequestParam(name = "timeslot")LocalDate date,
                                     @RequestParam(name = "doctor_name") String doctor_name,
                                     @RequestParam(name = "doctor_surname") String doctor_surname){
-        Insured insured = InsuredService.getInsuredByAmka(amka);
+        Insured insured = insuredService.getInsuredByAmka(amka);
         if (insured == null)
                 return "insured with the given amka doesn't exist";
         List<String> name_surname = new ArrayList<>();
