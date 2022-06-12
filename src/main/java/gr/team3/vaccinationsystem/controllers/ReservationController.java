@@ -2,12 +2,11 @@ package gr.team3.vaccinationsystem.controllers;
 
 import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Insured;
+import gr.team3.vaccinationsystem.model.Reservation;
 import gr.team3.vaccinationsystem.model.Timeslot;
 import gr.team3.vaccinationsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -48,4 +47,25 @@ public class ReservationController {
         reservationService.createReservation(insured,timeslot,vaccinationCenterService.getCenterByTimeslot(timeslot));
         return "reservation created!";
     }
+
+
+    @PutMapping("/changeReservation")
+    public String changeReservation(@RequestParam() String amka) {
+        Insured insured = InsuredService.getInsuredByAmka(amka);
+        if(insured==null){
+            return"Does not exist insured with this amka";
+        }
+        Reservation reservation = reservationService.getReservationByAmka(amka);
+        if(reservation == null){
+            return "Does not exist reservation for insured " +insured.getName();
+        }
+        reservationService.changeReservation(insured, reservation.getTimeslot(),reservation.getVaccinationCenter());
+        return "Τhe reservation has been changed";
+    }
+
+//    @GetMapping("/FutureReservations")
+//    public List<Reservation> getFutureReservations(){
+//        return reservationService.getFutureReservationList();
+//    }
+
 }

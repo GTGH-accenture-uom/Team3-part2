@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /*
 This class represents the service for all the reservations.
@@ -32,9 +33,23 @@ public class ReservationService {
     /* creates a new reservation that an insured person made to a certain timeslot and adds it
      * to the list. Sets the corresponding timeslot isFree field to false so that it appears
      * as unavailable/booked*/
+
     public void createReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
-        reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, center));
-        timeslot.setFree(false);
+
+        Pattern amkaPattern = Pattern.compile("\\d{11}");
+        if (insured != null && amkaPattern.matcher(insured.getAmka()).matches() && timeslot.isFree()) {
+            reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, center));
+            timeslot.setFree(false);
+        } else {
+            System.out.println("cannot make this reservasion");
+        }
+
+    }
+
+
+    public void deleteReservation(Insured insured, Timeslot timeslot) {
+        reservationList.removeIf(reservation -> reservation.getInsuredPerson().equals(insured));
+
     }
 
 
@@ -92,6 +107,33 @@ public class ReservationService {
         reservations.forEach(System.out::println);
     }
 
+    public void changeReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
+        if (insured.getCount() < 2) {
+            deleteReservation(insured, timeslot);
+            createReservation(insured, timeslot, center);
+            insured.setCount(insured.getCount() + 1);
+
+        } else {
+            System.out.println("You can't change the reservation again.");
+        }
+
+    }
+
+    public Reservation getReservationByAmka(String amka) {
+        for (Reservation reservation : reservationList) {
+            if (reservation.getInsuredPerson().getAmka().equals(amka)) {
+                return reservation;
+            }
+        }
+        return null;
+    }
+
+
+//    public List<Reservation> getFutureReservationList() {
+//        for(Reservation reservation : reservationList){
+//            if(reservation.get)
+//        }
+//    }
 }
 
 

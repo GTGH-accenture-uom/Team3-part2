@@ -13,6 +13,7 @@ public class Insured {
     private String surname;
     private LocalDate birthdate;
     private String email;
+    private int count;
 
     public Insured(String afm, String amka, String name, String surname, LocalDate birthdate, String email) {
         this.afm = afm;
@@ -21,6 +22,24 @@ public class Insured {
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
+    }
+
+    public Insured(String afm, String amka, String name, String surname, LocalDate birthdate, String email, int count) {
+        this.afm = afm;
+        this.amka = amka;
+        this.name = name;
+        this.surname = surname;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.count = count;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public Insured() {
