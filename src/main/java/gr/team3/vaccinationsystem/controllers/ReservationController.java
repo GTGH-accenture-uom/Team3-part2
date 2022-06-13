@@ -57,8 +57,7 @@ public class ReservationController {
         return "reservation created!";
     }
 
-    //http://localhost:8181/createReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
-
+    //http://localhost:8181/changeReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
     @PostMapping(path = "/changeReservation")
     public String changeReservation(@RequestParam (name = "amka") String amka,
                                     @RequestParam(name = "timeslot") String date,
@@ -81,19 +80,25 @@ public class ReservationController {
         //return timeslot.getDoctor().getName();
         if (! doctor.checkifDoctorIsInTimeslot(timeslot))
             return  "this Doctor does not belong to the given Timeslot";
-        reservationService.changeReservation(insured);
-        reservationService.createReservation(insured,timeslot,vaccinationCenterService.getCenterByTimeslot(timeslot));
-        return "reservation updated!";
+        if(insured.getCount()<3){
+            reservationService.changeReservation(insured);
+            reservationService.createReservation(insured,timeslot,vaccinationCenterService.getCenterByTimeslot(timeslot));
+            return "reservation updated!";
+        }else {
+            return "You can't change your reservation again!";
+        }
+
     }
 
 
-
+    //localhost:8181/futureReservations
     @GetMapping("/futureReservations")
     public List<String> getFutureReservations(){
 
         return reservationService.getFutureReservationList();
     }
 
+    //localhost:8181/reservationByDay
     @GetMapping(path = "/reservationByDay")
     public List<String> reservationByDay(@RequestParam(name = "day")int day,
                                           @RequestParam(name="month") int month,

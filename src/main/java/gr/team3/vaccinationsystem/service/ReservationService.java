@@ -114,15 +114,8 @@ public class ReservationService {
     }
 
     public String changeReservation(Insured insured) {
-        if (insured.getCount() < 2) {
             deleteReservation(insured);
-            insured.setCount(insured.getCount() + 1);
             return "Deleted successfully";
-
-        } else {
-            return "You can't delete the reservation again.";
-        }
-
     }
 
     public Reservation getReservationByAmka(String amka) {
