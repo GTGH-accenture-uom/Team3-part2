@@ -20,19 +20,23 @@ public class TimeslotController {
     @Autowired
     TimeslotService timeslotService = new TimeslotService();
 
-    //Search timeslots by day
-    @GetMapping(path = "/SearchTimeslot")
-    public List<Timeslot> SearchTimeslotByDayByMonthByYear(@RequestParam(name = "day")int day,
-                                                           @RequestParam(name="month") int month,
-                                                           @RequestParam(name="year") int year){
-        return    timeslotService.getFreeTimeslotsByDayByMonthByYear(day,month,year);
+
+    //Search free timeslots by inserting the desired day, month and year
+    //Shows the free timeslots of only that day
+    @GetMapping(path = "/SearchTimeslots")
+    public List<Timeslot> SearchTimeslots(@RequestParam(name = "day")int day,
+                                          @RequestParam(name="month") int month,
+                                          @RequestParam(name="year") int year){
+        return    timeslotService.getFreeTimeslots(day,month,year);
     }
 
-    //Search timeslots by month
-    @GetMapping(path = "/SearchTimeslotByMonth")
-    public List<Timeslot> SearchTimeslotByMonthByYear(@RequestParam(name = "month") int month,
-                                                      @RequestParam(name = "year") int year){
-        return   timeslotService.getFreeTimeslotsByMonthByYear(month,year);
+
+    //Search free timeslots by inserting the desired month and year
+    //Shows the free timeslots of that whole month
+    @GetMapping(path = "/SearchTimeslotsByMonth")
+    public List<Timeslot> SearchTimeslotsByMonth(@RequestParam(name = "month") int month,
+                                                 @RequestParam(name = "year") int year){
+       return timeslotService.getFreeTimeslotsByMonth(month,year);
     }
 
 }

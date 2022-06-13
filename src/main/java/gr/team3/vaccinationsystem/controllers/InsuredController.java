@@ -19,7 +19,7 @@ public class InsuredController {
     public  String checkHasCoverage(@RequestParam(name = "amka") String amka) {
         Insured insured = insuredService.getInsuredByAmka(amka);
         if (insured == null)
-            return "insured with the given amka doesn't exist";
+            return "The insured with the given amka doesn't exist";
         else
             return insuredService.checkHasCoverage(insured);
     }

@@ -68,7 +68,7 @@ public class AppConfig {
             timeslotService.addTimeslot(new Timeslot(9, 4, 2022, 12, 10, 11, 30, doctorService.getAllDoctors().get(0)));
             timeslotService.addTimeslot(new Timeslot(2, 3, 2022, 8, 05, 06, 26, doctorService.getAllDoctors().get(0)));
             timeslotService.addTimeslot(new Timeslot(22, 12, 2021, 9, 15, 16, 30, doctorService.getAllDoctors().get(0)));
-            timeslotService.addTimeslot(new Timeslot(7, 11, 2021, 19, 20, 21, 40, doctorService.getAllDoctors().get(0)));
+            timeslotService.addTimeslot(new Timeslot(28, 5, 2022, 19, 20, 21, 40, doctorService.getAllDoctors().get(0)));
             timeslotService.addTimeslot(new Timeslot(30, 5, 2022, 12, 50, 51, 10, doctorService.getAllDoctors().get(1)));
             timeslotService.addTimeslot(new Timeslot(30, 5, 2022, 2, 00, 01, 15, doctorService.getAllDoctors().get(1)));
             timeslotService.addTimeslot(new Timeslot(1, 7, 2021, 9, 30, 31, 50, doctorService.getAllDoctors().get(1)));

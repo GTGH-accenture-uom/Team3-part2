@@ -86,7 +86,7 @@ public class InsuredService {
                     return "Your vaccination coverage has expired!";
             }
             else
-                return "No vaccination record found";
+                return "No vaccination record found!";
         }
         return null;
     }

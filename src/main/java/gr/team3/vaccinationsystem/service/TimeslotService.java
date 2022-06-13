@@ -30,11 +30,10 @@ public class TimeslotService {
 
 
     //This is a method that gets all the free timeslots by day, month and year
-    public  List<Timeslot> getFreeTimeslotsByDayByMonthByYear(int day, int month, int year) {
+    public  List<Timeslot> getFreeTimeslots(int day, int month, int year) {
         List<Timeslot> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
-            if ( (timeslot.getDay() == day) &&  (timeslot.getMonth() == month) &&  (timeslot.getYear() == year) && timeslot.isFree())
-            {
+            if ((timeslot.getDay() == day) &&  (timeslot.getMonth() == month) &&  (timeslot.getYear() == year && timeslot.isFree())) {
                     freeTimeslots.add(timeslot);
             }
         }
@@ -44,13 +43,11 @@ public class TimeslotService {
 
 
     //This is a method that gets all the free timeslots by month and year
-    public  List<Timeslot> getFreeTimeslotsByMonthByYear(int month, int year) {
+    public  List<Timeslot> getFreeTimeslotsByMonth(int month, int year) {
         List<Timeslot> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
-            if ((timeslot.getMonth() == month) &&  (timeslot.getYear() == year) && timeslot.isFree())
-            {
+            if ((timeslot.getMonth() == month) &&  (timeslot.getYear() == year) && timeslot.isFree()) {
                     freeTimeslots.add(timeslot);
-                    break;
             }
         }
         return freeTimeslots;
