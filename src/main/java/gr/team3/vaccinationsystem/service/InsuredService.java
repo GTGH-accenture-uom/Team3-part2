@@ -81,13 +81,11 @@ public class InsuredService {
 
                 if ((vaccination1.getExpirationDate().isAfter(LocalDate.now()))) {
                     return ("Your vaccination certificate is still valid! It expires at " + vaccination1.getExpirationDate());
-
-                } else
+                }
+                else
                     return "Your vaccination coverage has expired!";
             }
-            else
-                return "No vaccination record found!";
         }
-        return null;
+        return "No vaccination record found!";
     }
 }

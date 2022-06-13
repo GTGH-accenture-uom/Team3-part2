@@ -34,7 +34,7 @@ public class TimeslotService {
         List<Timeslot> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
             if ((timeslot.getDay() == day) &&  (timeslot.getMonth() == month) &&  (timeslot.getYear() == year && timeslot.isFree())) {
-                    freeTimeslots.add(timeslot);
+                freeTimeslots.add(timeslot);
             }
         }
         return freeTimeslots;
@@ -47,12 +47,11 @@ public class TimeslotService {
         List<Timeslot> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
             if ((timeslot.getMonth() == month) &&  (timeslot.getYear() == year) && timeslot.isFree()) {
-                    freeTimeslots.add(timeslot);
+                freeTimeslots.add(timeslot);
             }
         }
         return freeTimeslots;
     }
-
 
 
     //This method adds all timeslots in the list

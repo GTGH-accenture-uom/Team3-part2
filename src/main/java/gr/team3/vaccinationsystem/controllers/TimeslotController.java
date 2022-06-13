@@ -13,6 +13,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @RestController
 public class TimeslotController {
@@ -27,6 +28,7 @@ public class TimeslotController {
     public List<Timeslot> SearchTimeslots(@RequestParam(name = "day")int day,
                                           @RequestParam(name="month") int month,
                                           @RequestParam(name="year") int year){
+
         return    timeslotService.getFreeTimeslots(day,month,year);
     }
 
@@ -38,5 +40,6 @@ public class TimeslotController {
                                                  @RequestParam(name = "year") int year){
        return timeslotService.getFreeTimeslotsByMonth(month,year);
     }
+
 
 }
