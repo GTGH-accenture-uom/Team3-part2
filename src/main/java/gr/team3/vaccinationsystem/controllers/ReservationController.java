@@ -51,7 +51,7 @@ public class ReservationController {
         Timeslot timeslot = timeslotService.getTimeslotByDateTime(date);
         if (timeslot == null)
             return "there is not such timeslot";
-        if ( !doctor.checkifDoctorIsInTimeslot(timeslot))
+        if ( doctor.checkifDoctorIsInTimeslot(timeslot))
             return  "this Doctor does not belong to the given Timeslot";
         reservationService.createReservation(insured,timeslot,vaccinationCenterService.getCenterByTimeslot(timeslot));
         return "reservation created!";
@@ -88,9 +88,18 @@ public class ReservationController {
 
 
 
-    @GetMapping("/FutureReservations")
+    @GetMapping("/futureReservations")
     public List<String> getFutureReservations(){
+
         return reservationService.getFutureReservationList();
+    }
+
+    @GetMapping(path = "/reservationByDay")
+    public List<String> reservationByDay(@RequestParam(name = "day")int day,
+                                          @RequestParam(name="month") int month,
+                                          @RequestParam(name="year") int year){
+
+        return    reservationService.getReservationListByDay(day,month,year);
     }
 
 }

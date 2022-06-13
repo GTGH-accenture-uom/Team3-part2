@@ -164,6 +164,20 @@ public class ReservationService {
         }
         return customReservations;
     }
+    public List<String> getReservationListByDay(int day, int month, int year) {
+        List<Reservation> reservationByDay = new ArrayList<>();
+        for(Reservation reservation : reservationList){
+                if((reservation.getTimeslot().getDay() == day) &&  (reservation.getTimeslot().getMonth() == month) &&  (reservation.getTimeslot().getYear() == year )){
+                    reservationByDay.add(reservation);
+                }
+        }
+        List<String> customReservations = new ArrayList<>();
+        for(Reservation reservation: reservationByDay){
+            customReservations.add(reservation.getData());
+        }
+        return customReservations;
+    }
+
 }
 
 
