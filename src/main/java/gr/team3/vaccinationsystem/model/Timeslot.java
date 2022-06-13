@@ -1,15 +1,18 @@
 package gr.team3.vaccinationsystem.model;
 
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Component
 public class Timeslot {
 
-    private static int day;
-    private static int month;
-    private static int year;
+    private  int day;
+    private  int month;
+    private  int year;
     private int hour;
     private int minutes;
     private int startMinute;
@@ -34,9 +37,9 @@ public class Timeslot {
     public Timeslot() {
     }
 
-    public static int getDay(int day) {return day;}
-    public static int getMonth(int month) {return Timeslot.month;}
-    public static int getYear(int year) {return year;}
+    public  Integer getDay() {return day;}
+    public  Integer getMonth() {return month;}
+    public  Integer getYear() {return year;}
     public int getHour() {return hour;}
     public int getMinutes() {return minutes;}
     public int getStartMinute() {return startMinute;}
@@ -78,4 +81,7 @@ public class Timeslot {
 
     }
 
+    public LocalDateTime getLocalDateWithTime() {
+        return LocalDateTime.of(LocalDate.of(year,month,day), LocalTime.of(hour,minutes,0));
+    }
 }

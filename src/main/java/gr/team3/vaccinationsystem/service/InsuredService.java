@@ -26,8 +26,8 @@ public class InsuredService {
         Pattern amkaPattern = Pattern.compile("\\d{11}");
         if(getInsuredByAmka(amka)== null){
             if(amkaPattern.matcher(amka).matches()){
-                insuredList.add(new Insured(afm, amka ,name, surname,birthdate, email ));
-                System.out.println("Insured created!");
+                insuredList.add(new Insured(afm, amka ,name, surname,birthdate, email));
+                //System.out.println("Insured created!"); this should go in controller
             }else{
                 System.out.println("Amka is not valid");
             }
@@ -42,7 +42,7 @@ public class InsuredService {
         return insuredList;
     }
 
-    public static Insured getInsuredByAmka(String s) {
+    public Insured getInsuredByAmka(String s) {
         for (Insured insured: InsuredService.insuredList) {
             if (insured.getAmka().equals(s))
                 return insured;
@@ -85,7 +85,7 @@ public class InsuredService {
     //Checks and prints if the insured person's vaccination coverage has expired
     //or not  and the expiration date depending on the vaccination they had.It
     //also checks and prints if the insured has a vaccination record
-    public static String checkHasCoverage(Insured insured) {
+    public String checkHasCoverage(Insured insured) {
         for (Vaccination vaccination1 : VaccinationService.getVaccinationslist()) {
             if (vaccination1.getInsuredPerson().equals(insured)){
 

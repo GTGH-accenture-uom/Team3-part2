@@ -35,13 +35,17 @@ public class ReservationService {
      * as unavailable/booked*/
 
     public void createReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
-
+//        System.out.println(insured);
+//        System.out.println(timeslot);
+//        System.out.println(center);
         Pattern amkaPattern = Pattern.compile("\\d{11}");
         if (insured != null && amkaPattern.matcher(insured.getAmka()).matches() && timeslot.isFree()) {
             reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, center));
             timeslot.setFree(false);
+            insured.increaseResCount();
         } else {
-            System.out.println("cannot make this reservasion");
+            System.out.println("cannot make this reservasion");  //καλυτερα να ειναι στο controller αυτο
+            //για να το εμφανιζει και στο postman
         }
 
     }
@@ -126,6 +130,10 @@ public class ReservationService {
             }
         }
         return null;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservationList;
     }
 
 

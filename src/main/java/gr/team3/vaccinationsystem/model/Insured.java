@@ -13,7 +13,7 @@ public class Insured {
     private String surname;
     private LocalDate birthdate;
     private String email;
-    private int count;
+    private int count;  //change name to reservationCount
 
     public Insured(String afm, String amka, String name, String surname, LocalDate birthdate, String email) {
         this.afm = afm;
@@ -22,17 +22,10 @@ public class Insured {
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
+        count = 0;
     }
 
-    public Insured(String afm, String amka, String name, String surname, LocalDate birthdate, String email, int count) {
-        this.afm = afm;
-        this.amka = amka;
-        this.name = name;
-        this.surname = surname;
-        this.birthdate = birthdate;
-        this.email = email;
-        this.count = count;
-    }
+
 
     public int getCount() {
         return count;
@@ -103,5 +96,13 @@ public class Insured {
                 ", birthdate=" + birthdate +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public boolean checkIfHasReservation() {
+        return count>0;
+    }
+
+    public void increaseResCount(){
+        count++;
     }
 }

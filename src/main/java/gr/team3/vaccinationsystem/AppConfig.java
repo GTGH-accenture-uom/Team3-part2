@@ -5,9 +5,11 @@ import gr.team3.vaccinationsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 
+@Configuration
 public class AppConfig {
 
     @Autowired
@@ -127,6 +129,9 @@ public class AppConfig {
             vaccinationService.makeVaccination(ReservationService.getReservationList().get(3));
             vaccinationService.makeVaccination(ReservationService.getReservationList().get(4));
             vaccinationService.makeVaccination(ReservationService.getReservationList().get(5));
+
+            timeslotService.printTimeslotsLocalDate();
+           reservationService.getReservations().forEach(System.out::println);
         };
 
     }

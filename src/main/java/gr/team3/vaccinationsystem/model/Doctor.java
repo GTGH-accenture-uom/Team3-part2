@@ -72,4 +72,12 @@ public class Doctor {
         }
         return results;
     }
+
+    public boolean checkifDoctorIsInTimeslot(Timeslot timeslot) {
+        for (Timeslot t:timeslots) {
+            if (t.equals(timeslot))
+                return true;
+        }
+        return false;
+    }
 }

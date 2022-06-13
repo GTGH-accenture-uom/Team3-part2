@@ -5,6 +5,8 @@ import gr.team3.vaccinationsystem.model.Timeslot;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class TimeslotService {
     public static List<Timeslot> getFreeTimeslotsByDayByMonthByYear(int day, int month, int year) {
         List<Timeslot> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
-            if ( (Timeslot.getDay(day) == day) &&  (Timeslot.getMonth(month) == month) &&  (Timeslot.getYear(year) == year))
+            if ( timeslot.getDay().equals(day) &&  timeslot.getMonth().equals(month) &&  timeslot.getYear().equals(year))
             {
                 if ( timeslot.isFree()) {
                     freeTimeslots.add(timeslot);
@@ -44,7 +46,7 @@ public class TimeslotService {
     public static List<Timeslot> getFreeTimeslotsByMonthByYear(int month, int year) {
         List<Timeslot> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
-            if ((Timeslot.getMonth(month) == month) &&  (Timeslot.getYear(year) == year))
+            if ((timeslot.getMonth() == month) &&  (timeslot.getYear() == year))
             {
                 if ( timeslot.isFree()) {
                     freeTimeslots.add(timeslot);
@@ -63,6 +65,23 @@ public class TimeslotService {
     public Timeslot getTimeslotByDate(LocalDate date) {
         for (Timeslot timeslot:timeslotList) {
             if (timeslot.getLocalDate().equals(date))
+                return timeslot;
+        }
+        return null;
+    }
+
+    public void printTimeslotsLocalDate(){
+        for (Timeslot t:timeslotList) {
+            System.out.println(t.getLocalDateWithTime() + "Dr: " +  t.getDoctor());
+
+        }
+    }
+
+    public Timeslot getTimeslotByDateTime(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+        for (Timeslot timeslot:timeslotList) {
+            if (timeslot.getLocalDateWithTime().equals(dateTime))
                 return timeslot;
         }
         return null;
