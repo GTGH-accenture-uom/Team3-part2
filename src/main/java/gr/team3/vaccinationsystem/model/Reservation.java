@@ -1,5 +1,6 @@
 package gr.team3.vaccinationsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +12,12 @@ import java.util.ArrayList;
 public class Reservation {
 
     Insured insuredPerson;
+    @JsonIgnore
     Timeslot timeslot;
     Boolean isDone = false;
+    @JsonIgnore
     VaccinationCenter vaccinationCenter;
+    @JsonIgnore
     Doctor doctor;
 
     public Reservation(Insured insuredPerson, Doctor doctor, Timeslot timeslot, VaccinationCenter vaccinationCenter) {
@@ -70,5 +74,17 @@ public class Reservation {
                 '}';
     }
 
+    public String getData(){
+        StringBuilder data= new StringBuilder();
+        data.append("amka: " +insuredPerson.getAmka()+"  ");
+        data.append("date and time: " +timeslot.getLocalDateWithTime()+"  ");
+        data.append("doctor: " +doctor.getName()+" "+doctor.getSurname()+"  ");
+        data.append("vaccination center: " +vaccinationCenter.getCode());
+        return data.toString();
+    }
 
+
+    public boolean getDone() {
+        return isDone;
+    }
 }

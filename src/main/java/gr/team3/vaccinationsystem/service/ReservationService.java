@@ -51,9 +51,11 @@ public class ReservationService {
     }
 
 
-    public void deleteReservation(Insured insured, Timeslot timeslot) {
-        reservationList.removeIf(reservation -> reservation.getInsuredPerson().equals(insured));
+    public void deleteReservation(Insured insured) {
 
+        Reservation reservation = this.getReservationByAmka(insured.getAmka());
+        reservation.getTimeslot().setFree(true);
+        reservationList.remove(reservation);
     }
 
 
@@ -111,14 +113,14 @@ public class ReservationService {
         reservations.forEach(System.out::println);
     }
 
-    public void changeReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
+    public String changeReservation(Insured insured) {
         if (insured.getCount() < 2) {
-            deleteReservation(insured, timeslot);
-            createReservation(insured, timeslot, center);
+            deleteReservation(insured);
             insured.setCount(insured.getCount() + 1);
+            return "Deleted successfully";
 
         } else {
-            System.out.println("You can't change the reservation again.");
+            return "You can't delete the reservation again.";
         }
 
     }
@@ -145,11 +147,23 @@ public class ReservationService {
     }
 
 
-//    public List<Reservation> getFutureReservationList() {
-//        for(Reservation reservation : reservationList){
-//            if(reservation.get)
-//        }
-//    }
+
+
+    public List<String> getFutureReservationList() {
+        List<Reservation> futureReservation = new ArrayList<>();
+        for(Reservation reservation : reservationList){
+            if(!reservation.getDone()){
+                if(!reservation.getTimeslot().getLocalDate().isBefore(LocalDate.now())){
+                    futureReservation.add(reservation);
+                }
+            }
+        }
+        List<String> customReservations = new ArrayList<>();
+        for(Reservation reservation: futureReservation){
+            customReservations.add(reservation.getData());
+        }
+        return customReservations;
+    }
 }
 
 

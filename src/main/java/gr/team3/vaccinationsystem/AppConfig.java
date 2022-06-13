@@ -64,7 +64,7 @@ public class AppConfig {
 
 
             //Create the timeslots
-            timeslotService.addTimeslot(new Timeslot(6, 5, 2022, 18, 00, 01, 20, doctorService.getAllDoctors().get(0)));
+            timeslotService.addTimeslot(new Timeslot(6, 9, 2022, 18, 00, 01, 20, doctorService.getAllDoctors().get(0)));
             timeslotService.addTimeslot(new Timeslot(9, 4, 2022, 12, 10, 11, 30, doctorService.getAllDoctors().get(0)));
             timeslotService.addTimeslot(new Timeslot(2, 3, 2022, 8, 05, 06, 26, doctorService.getAllDoctors().get(0)));
             timeslotService.addTimeslot(new Timeslot(22, 12, 2021, 9, 15, 16, 30, doctorService.getAllDoctors().get(0)));
