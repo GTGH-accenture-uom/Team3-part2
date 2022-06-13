@@ -136,6 +136,14 @@ public class ReservationService {
         return reservationList;
     }
 
+    public Reservation getReservationByAmkaAndTimeslot(String amka, Timeslot timeslot) {
+        for (Reservation res:reservationList) {
+            if (this.getReservationByAmka(amka).equals(res) && res.getTimeslot().equals(timeslot))
+                return res;
+        }
+        return null;
+    }
+
 
 //    public List<Reservation> getFutureReservationList() {
 //        for(Reservation reservation : reservationList){

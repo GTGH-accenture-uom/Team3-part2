@@ -18,6 +18,7 @@ such a method to add all timeslots in the list.
 @Service
 public class TimeslotService {
 
+    private static int ID;
     private static List<Timeslot> timeslotList = new ArrayList<>();
 
     public static List<Timeslot> getTimeslotList() {
@@ -59,6 +60,7 @@ public class TimeslotService {
 
     //This method adds all timeslots in the list
     public void addTimeslot(Timeslot timeslot){
+        timeslot.setID(ID++);
         timeslotList.add(timeslot);
     }
 
@@ -83,6 +85,15 @@ public class TimeslotService {
         for (Timeslot timeslot:timeslotList) {
             if (timeslot.getLocalDateWithTime().equals(dateTime))
                 return timeslot;
+        }
+        return null;
+    }
+
+    public Timeslot getTimeslotbyID(int ID) {
+        for (Timeslot t: timeslotList) {
+            if (t.getID().equals(ID))
+                return t;
+
         }
         return null;
     }

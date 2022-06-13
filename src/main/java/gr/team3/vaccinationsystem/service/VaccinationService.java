@@ -6,6 +6,8 @@ import gr.team3.vaccinationsystem.model.Vaccination;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +21,22 @@ public class VaccinationService {
 
     private static List<Vaccination> vaccinationslist = new ArrayList<>();
 
-    public void makeVaccination(Reservation reservation){
+    public String makeVaccination(Reservation reservation, String expiration_date){
+        //check if vaccination already exists
+        for (Vaccination vacc:vaccinationslist) {
+            if (vacc.getInsuredPerson().equals(reservation.getInsuredPerson()))
+                return "vaccination already done!";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate exp_date = LocalDate.parse(expiration_date, formatter);
+        if (exp_date.isBefore(reservation.getTimeslot().getLocalDate())){
+            return "invalid expiration date";
+        }
         reservation.setDone(true);
-        LocalDate expiration_date = reservation.getTimeslot().getLocalDate().plusMonths(2);
-        Vaccination vacc = new Vaccination(reservation.getInsuredPerson(), reservation.getDoctor(),reservation.getTimeslot().getLocalDate(), expiration_date);
+        Vaccination vacc = new Vaccination(reservation.getInsuredPerson(), reservation.getDoctor(),reservation.getTimeslot().getLocalDate(), exp_date);
         vaccinationslist.add(vacc);
         reservation.getDoctor().addVaccination(vacc);
+        return "created vaccination!";
     }
 
     public static List<Vaccination> getVaccinationslist() {

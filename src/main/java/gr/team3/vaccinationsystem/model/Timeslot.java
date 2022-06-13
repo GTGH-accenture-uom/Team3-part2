@@ -10,13 +10,14 @@ import java.time.LocalTime;
 @Component
 public class Timeslot {
 
-    private  int day;
-    private  int month;
-    private  int year;
+    private int day;
+    private int month;
+    private int year;
     private int hour;
     private int minutes;
     private int startMinute;
     private int endMinute;
+    private Integer ID;
     Doctor doctor;
     /* isFree is true when the timeslot is free/available and false when it has been booked*/
     private boolean isFree;
@@ -32,6 +33,7 @@ public class Timeslot {
         this.endMinute = endMinute;
         this.doctor = doctor;
         isFree = true;
+
     }
 
     public Timeslot() {
@@ -54,6 +56,14 @@ public class Timeslot {
     public void setEndMinute(int endMinute) {this.endMinute = endMinute;}
     public void setDoctor(Doctor doctor) {this.doctor = doctor;}
 
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
     public boolean isFree() {
         return isFree;
     }
@@ -65,6 +75,7 @@ public class Timeslot {
     @Override
     public String toString() {
         return "Timeslot{" +
+                "ID=" + ID +
                 "day=" + day +
                 ", month=" + month +
                 ", year=" + year +

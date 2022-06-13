@@ -29,7 +29,8 @@ public class ReservationController {
 
 
     //DONE CHECK IF DOCTOR BELONGS TO THE GIVEN TIMESLOT
-    //TODO CHECK IF INSURED  HAS ALREADY MADE A RESERVATION
+    //DONE CHECK IF INSURED  HAS ALREADY MADE A RESERVATION
+    //http://localhost:8181/createReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
     @PostMapping(path = "/createReservation")
     public String createReservation(@RequestParam (name = "amka") String amka,
                                     @RequestParam(name = "timeslot") String date,
