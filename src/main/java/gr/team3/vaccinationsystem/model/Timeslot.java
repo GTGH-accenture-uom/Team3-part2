@@ -1,5 +1,6 @@
 package gr.team3.vaccinationsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class Timeslot {
     private int startMinute;
     private int endMinute;
     private Integer ID;
+    @JsonIgnore
     Doctor doctor;
     /* isFree is true when the timeslot is free/available and false when it has been booked*/
     private boolean isFree;

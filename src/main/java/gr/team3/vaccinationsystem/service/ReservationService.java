@@ -34,7 +34,7 @@ public class ReservationService {
      * to the list. Sets the corresponding timeslot isFree field to false so that it appears
      * as unavailable/booked*/
 
-    public void createReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
+    public String createReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
 //        System.out.println(insured);
 //        System.out.println(timeslot);
 //        System.out.println(center);
@@ -43,9 +43,9 @@ public class ReservationService {
             reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, center));
             timeslot.setFree(false);
             insured.increaseResCount();
-        } else {
-            System.out.println("cannot make this reservasion");  //καλυτερα να ειναι στο controller αυτο
-            //για να το εμφανιζει και στο postman
+            return "reservation created!";
+        }else{
+            return "cannot make reservation!";
         }
 
     }

@@ -51,10 +51,10 @@ public class ReservationController {
         Timeslot timeslot = timeslotService.getTimeslotByDateTime(date);
         if (timeslot == null)
             return "there is not such timeslot";
-        if ( doctor.checkifDoctorIsInTimeslot(timeslot))
+        if (! doctor.checkifDoctorIsInTimeslot(timeslot))
             return  "this Doctor does not belong to the given Timeslot";
-        reservationService.createReservation(insured,timeslot,vaccinationCenterService.getCenterByTimeslot(timeslot));
-        return "reservation created!";
+         return reservationService.createReservation(insured,timeslot,vaccinationCenterService.getCenterByTimeslot(timeslot));
+        //return "reservation created!";
     }
 
     //http://localhost:8181/changeReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
@@ -75,9 +75,8 @@ public class ReservationController {
             return "there is no doctor with such name and surname";
         }
         Timeslot timeslot = timeslotService.getTimeslotByDateTime(date);
-        if (timeslot == null)
+        if (timeslot == null || !timeslot.isFree())
             return "there is not such timeslot";
-        //return timeslot.getDoctor().getName();
         if (! doctor.checkifDoctorIsInTimeslot(timeslot))
             return  "this Doctor does not belong to the given Timeslot";
         if(insured.getCount()<3){

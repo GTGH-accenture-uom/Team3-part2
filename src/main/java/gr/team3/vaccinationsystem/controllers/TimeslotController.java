@@ -15,25 +15,27 @@ import java.util.List;
 
 @RestController
 public class TimeslotController {
-/*
     @Autowired
     TimeslotService timeslotService = new TimeslotService();
-    //Search timeslots by day
-    @GetMapping(path = "/SearchTimeslot")
-    public List<Timeslot> SearchTimeslotByDayByMonthByYear(@RequestParam Integer day,
-                                                           @RequestParam Integer month,
-                                                           @RequestParam Integer year){
-        return  TimeslotService.getFreeTimeslotsByDayByMonthByYear(day,month,year);
-    }
 
-    //Search timeslots by month
-    @GetMapping(path = "/SearchTimeslot")
-    public List<Timeslot> SearchTimeslotByMonthByYear(@RequestParam int month,
-                                                      @RequestParam int year){
-        return  TimeslotService.getFreeTimeslotsByMonthByYear(month,year);
+
+    //Search free timeslots by inserting the desired day, month and year
+    //Shows the free timeslots of only that day
+    @GetMapping(path = "/SearchTimeslots")
+    public List<Timeslot> SearchTimeslots(@RequestParam(name = "day")int day,
+                                          @RequestParam(name="month") int month,
+                                          @RequestParam(name="year") int year){
+
+        return    timeslotService.getFreeTimeslots(day,month,year);
     }
 
 
- */
+    //Search free timeslots by inserting the desired month and year
+    //Shows the free timeslots of that whole month
+    @GetMapping(path = "/SearchTimeslotsByMonth")
+    public List<Timeslot> SearchTimeslotsByMonth(@RequestParam(name = "month") int month,
+                                                 @RequestParam(name = "year") int year){
+        return timeslotService.getFreeTimeslotsByMonth(month,year);
+    }
 
 }

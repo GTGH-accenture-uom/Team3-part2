@@ -122,7 +122,7 @@ public class AppConfig {
             reservationService.createReservation(insuredService.getInsuredByAmka("15064701124"), TimeslotService.getTimeslotList().get(15), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(15)));
             reservationService.createReservation(insuredService.getInsuredByAmka("26048108643"), TimeslotService.getTimeslotList().get(18), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(18)));
 
-            //make vaccinations for 6 out of 8 reservations
+           // make vaccinations for 6 out of 8 reservations
 //            vaccinationService.makeVaccination(ReservationService.getReservationList().get(0));
 //            vaccinationService.makeVaccination(ReservationService.getReservationList().get(1));
 //            vaccinationService.makeVaccination(ReservationService.getReservationList().get(2));

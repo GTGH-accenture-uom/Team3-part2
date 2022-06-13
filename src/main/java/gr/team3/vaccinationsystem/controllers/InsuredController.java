@@ -12,14 +12,12 @@ public class InsuredController {
     @Autowired
     InsuredService insuredService = new InsuredService();
     //Check if your vaccination is valid, and it's expiration date
-    @GetMapping("/checkIfYouHaveCoverage")
-    public String checkIfYouHaveCoverage(@RequestParam() String amka) {
-        System.out.println(insuredService.getAllInsured());
+    @GetMapping(path = "/checkHasCoverage")
+    public  String checkHasCoverage(@RequestParam(name = "amka") String amka) {
         Insured insured = insuredService.getInsuredByAmka(amka);
-        if (insured == null)
-        {
-            return "This amka doesn't exist";
-        }
-        else  return insuredService.checkHasCoverage(insured);
+        if (insured == null){
+            return "The insured with the given amka doesn't exist";
+        } else
+            return insuredService.checkHasCoverage(insured);
     }
 }
