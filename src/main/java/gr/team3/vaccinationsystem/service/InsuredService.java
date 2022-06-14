@@ -1,5 +1,6 @@
 package gr.team3.vaccinationsystem.service;
 
+import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Insured;
 import gr.team3.vaccinationsystem.model.Reservation;
 import gr.team3.vaccinationsystem.model.Vaccination;
@@ -18,7 +19,9 @@ such as the creation of an insured person.
 @Service
 public class InsuredService {
 
+
    private static List<Insured> insuredList = new ArrayList<Insured>();
+
 
     //creates new Insured object and adds it to the list
     public void createInsured(String afm, String amka, String name, String surname, LocalDate birthdate, String email)
@@ -36,12 +39,15 @@ public class InsuredService {
 
     }
 
+
     //Returns the list with all the insured people.
     public List<Insured> getAllInsured()
     {
         return insuredList;
     }
 
+
+    //Get an insured through his amka
     public Insured getInsuredByAmka(String s) {
         for (Insured insured: InsuredService.insuredList) {
             if (insured.getAmka().equals(s))
@@ -49,6 +55,8 @@ public class InsuredService {
         }
         return null;
     }
+
+
 
     /*
     this method finds and prints the insured people over the age of 60 that have not made
@@ -82,6 +90,8 @@ public class InsuredService {
         return results;
     }
 
+
+
     //Checks and prints if the insured person's vaccination coverage has expired
     //or not  and the expiration date depending on the vaccination they had.It
     //also checks and prints if the insured has a vaccination record
@@ -103,6 +113,22 @@ public class InsuredService {
                 return "No vaccination record found!";
             }
         }
+
+
+
+
+    //Deletes an insured that already exists using the insured amka
+    public String deleteInsuredByAmka(String amka) {
+        Insured insured = this.getInsuredByAmka(amka);
+        if (insured == null) {
+            return "The insured with the given amka doesn't exist";
+        }
+        else
+        {
+            insuredList.remove(insured);
+            return "Insured with the: " + amka + " amka successfully deleted";
+        }
+    }
 
 
 

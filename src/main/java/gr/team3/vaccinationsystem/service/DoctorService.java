@@ -2,6 +2,7 @@ package gr.team3.vaccinationsystem.service;
 
 
 import gr.team3.vaccinationsystem.model.Doctor;
+import gr.team3.vaccinationsystem.model.Insured;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,13 +19,16 @@ public class DoctorService {
 
     private List<Doctor> doctorsList = new ArrayList<>();
 
+
     public void createDoctor(String amka, String name, String surname){
         doctorsList.add(new Doctor(amka,name,surname));
     }
 
+
     public List<Doctor> getAllDoctors(){
         return doctorsList;
     }
+
 
     public Doctor getDoctorByNameSurname(List<String> name_surname) {
         for (Doctor doctor:doctorsList) {
@@ -32,5 +36,45 @@ public class DoctorService {
                 return doctor;
         }
         return null;
+    }
+
+    //Deletes a doctor that already exists using the doctor's amka
+    public String deleteDoctorByAmka(String amka) {
+        Doctor doctor = this.getDoctorByAmka(amka);
+        if (doctor == null) {
+            return "The doctor with the given amka doesn't exist";
+        }
+        else
+        {
+           doctorsList.remove(doctor);
+            return "Doctor with the: " + amka + " amka successfully deleted";
+        }
+    }
+
+
+    public Doctor getDoctorByAmka(String amka) {
+        for (Doctor doctor:doctorsList) {
+            if ( doctor.getSurname().equals(amka))
+                return doctor;
+        }
+        return null;
+    }
+
+    public List<Doctor> getDoctorByName(String name) {
+        List<Doctor> doctors = new ArrayList<>();
+        for (Doctor doctor : doctorsList) {
+            if ( doctor.getSurname().equals(name))
+                doctors.add(doctor);
+        }
+        return doctors;
+    }
+
+    public List<Doctor> showDoctorBySurname(String surname) {
+        List<Doctor> doctors = new ArrayList<>();
+        for (Doctor doctor : doctorsList) {
+            if ( doctor.getSurname().equals(surname))
+                doctors.add(doctor);
+        }
+        return doctors;
     }
 }

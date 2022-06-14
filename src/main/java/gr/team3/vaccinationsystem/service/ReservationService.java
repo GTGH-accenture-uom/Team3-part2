@@ -118,6 +118,7 @@ public class ReservationService {
             return "Deleted successfully";
     }
 
+
     public Reservation getReservationByAmka(String amka) {
         for (Reservation reservation : reservationList) {
             if (reservation.getInsuredPerson().getAmka().equals(amka)) {
@@ -127,9 +128,12 @@ public class ReservationService {
         return null;
     }
 
+
     public List<Reservation> getReservations() {
         return reservationList;
     }
+
+
 
     public Reservation getReservationByAmkaAndTimeslot(String amka, Timeslot timeslot) {
         for (Reservation res:reservationList) {
