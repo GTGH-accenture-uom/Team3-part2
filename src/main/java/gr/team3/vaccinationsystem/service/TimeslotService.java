@@ -1,5 +1,6 @@
 package gr.team3.vaccinationsystem.service;
 
+import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Insured;
 import gr.team3.vaccinationsystem.model.Timeslot;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class TimeslotService {
     private static int ID;
     private static List<Timeslot> timeslotList = new ArrayList<>();
 
-    public static List<Timeslot> getTimeslotList() {
+    public List<Timeslot> getTimeslotList() {
         return timeslotList;
     }
 
@@ -54,9 +55,12 @@ public class TimeslotService {
     }
 
     //This method adds all timeslots in the list
-    public void addTimeslot(Timeslot timeslot){
+    public String addTimeslot(Timeslot timeslot){
+        if (timeslot.getLocalDate().isBefore(LocalDate.now()))
+                return "Invalid date";
         timeslot.setID(ID++);
         timeslotList.add(timeslot);
+        return "timeslot created successfully!";
     }
 
     public Timeslot getTimeslotByDate(LocalDate date) {
@@ -92,4 +96,16 @@ public class TimeslotService {
         }
         return null;
     }
+
+
+    public String deleteTimeslotByID(Integer id) {
+        if (timeslotList.removeIf(timeslot -> timeslot.getID().equals(id))) {
+            return "deleted successfully!";
+        }
+        else {
+            return "timeslot doesn't exist";
+        }
+    }
+
+
 }

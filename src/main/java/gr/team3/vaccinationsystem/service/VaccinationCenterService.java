@@ -2,6 +2,7 @@
 package gr.team3.vaccinationsystem.service;
 
 import gr.team3.vaccinationsystem.model.Timeslot;
+import gr.team3.vaccinationsystem.model.Vaccination;
 import gr.team3.vaccinationsystem.model.VaccinationCenter;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,11 @@ public class VaccinationCenterService {
 
     public void createVaccinationCenter(String code, String address) {
         this.vaccinationCenterList.add(new VaccinationCenter(code, address));
+    }
+
+    public String createVaccinationCenter(VaccinationCenter center) {
+        this.vaccinationCenterList.add(center);
+        return "created successfully!";
     }
 
     public List<VaccinationCenter> getAllCenters() {
@@ -78,5 +84,14 @@ public class VaccinationCenterService {
             }
         }
         return null;
+    }
+
+    public String deleteCenterByCode(String code) {
+        if (vaccinationCenterList.removeIf(vaccinationCenter -> vaccinationCenter.getCode().equals(code))) {
+            return "deleted successfully!";
+        }
+        else {
+            return "Center doesn't exist";
+        }
     }
 }

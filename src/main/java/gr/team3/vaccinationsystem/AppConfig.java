@@ -65,62 +65,63 @@ public class AppConfig {
 
             //Create the timeslots
             timeslotService.addTimeslot(new Timeslot(6, 9, 2022, 18, 00, 01, 20, doctorService.getAllDoctors().get(0)));
-            timeslotService.addTimeslot(new Timeslot(9, 4, 2022, 12, 10, 11, 30, doctorService.getAllDoctors().get(0)));
-            timeslotService.addTimeslot(new Timeslot(2, 3, 2022, 8, 05, 06, 26, doctorService.getAllDoctors().get(0)));
-            timeslotService.addTimeslot(new Timeslot(22, 12, 2021, 9, 15, 16, 30, doctorService.getAllDoctors().get(0)));
-            timeslotService.addTimeslot(new Timeslot(7, 11, 2021, 19, 20, 21, 40, doctorService.getAllDoctors().get(0)));
-            timeslotService.addTimeslot(new Timeslot(30, 5, 2022, 12, 50, 51, 10, doctorService.getAllDoctors().get(1)));
-            timeslotService.addTimeslot(new Timeslot(12, 6, 2022, 2, 00, 01, 15, doctorService.getAllDoctors().get(1)));
-            timeslotService.addTimeslot(new Timeslot(1, 7, 2021, 9, 30, 31, 50, doctorService.getAllDoctors().get(1)));
-            timeslotService.addTimeslot(new Timeslot(4, 8, 2021, 20, 10, 11, 30, doctorService.getAllDoctors().get(1)));
-            timeslotService.addTimeslot(new Timeslot(10, 10, 2021, 10, 20, 21, 40, doctorService.getAllDoctors().get(1)));
+            timeslotService.addTimeslot(new Timeslot(9, 10, 2022, 12, 10, 11, 30, doctorService.getAllDoctors().get(0)));
+            timeslotService.addTimeslot(new Timeslot(2, 11, 2022, 8, 05, 06, 26, doctorService.getAllDoctors().get(0)));
+            timeslotService.addTimeslot(new Timeslot(22, 12, 2022, 9, 15, 16, 30, doctorService.getAllDoctors().get(0)));
+            timeslotService.addTimeslot(new Timeslot(7, 11, 2022, 19, 20, 21, 40, doctorService.getAllDoctors().get(0)));
+            timeslotService.addTimeslot(new Timeslot(30, 7, 2023, 12, 50, 51, 10, doctorService.getAllDoctors().get(1)));
+            timeslotService.addTimeslot(new Timeslot(29, 6, 2022, 2, 00, 01, 15, doctorService.getAllDoctors().get(1)));
+            timeslotService.addTimeslot(new Timeslot(1, 7, 2022, 9, 30, 31, 50, doctorService.getAllDoctors().get(1)));
+            timeslotService.addTimeslot(new Timeslot(4, 8, 2022, 20, 10, 11, 30, doctorService.getAllDoctors().get(1)));
+            timeslotService.addTimeslot(new Timeslot(10, 10, 2022, 10, 20, 21, 40, doctorService.getAllDoctors().get(1)));
 
-            timeslotService.addTimeslot(new Timeslot(7, 5, 2022, 18, 00, 01, 20, doctorService.getAllDoctors().get(2)));
-            timeslotService.addTimeslot(new Timeslot(10, 4, 2022, 12, 10, 11, 30, doctorService.getAllDoctors().get(2)));
-            timeslotService.addTimeslot(new Timeslot(3, 3, 2022, 8, 05, 06, 26, doctorService.getAllDoctors().get(2)));
-            timeslotService.addTimeslot(new Timeslot(23, 12, 2021, 9, 15, 16, 30, doctorService.getAllDoctors().get(2)));
-            timeslotService.addTimeslot(new Timeslot(8, 11, 2021, 19, 20, 21, 40, doctorService.getAllDoctors().get(2)));
-            timeslotService.addTimeslot(new Timeslot(29, 5, 2022, 12, 50, 51, 10, doctorService.getAllDoctors().get(3)));
-            timeslotService.addTimeslot(new Timeslot(13, 6, 2022, 2, 00, 01, 15, doctorService.getAllDoctors().get(3)));
-            timeslotService.addTimeslot(new Timeslot(2, 7, 2021, 9, 30, 31, 50, doctorService.getAllDoctors().get(3)));
-            timeslotService.addTimeslot(new Timeslot(5, 8, 2021, 20, 10, 11, 30, doctorService.getAllDoctors().get(3)));
-            timeslotService.addTimeslot(new Timeslot(11, 10, 2021, 10, 20, 21, 40, doctorService.getAllDoctors().get(3)));
+            timeslotService.addTimeslot(new Timeslot(7, 9, 2022, 18, 00, 01, 20, doctorService.getAllDoctors().get(2)));
+            timeslotService.addTimeslot(new Timeslot(10, 10, 2022, 12, 10, 11, 30, doctorService.getAllDoctors().get(2)));
+            timeslotService.addTimeslot(new Timeslot(3, 10, 2022, 8, 05, 06, 26, doctorService.getAllDoctors().get(2)));
+            timeslotService.addTimeslot(new Timeslot(23, 12, 2022, 9, 15, 16, 30, doctorService.getAllDoctors().get(2)));
+            timeslotService.addTimeslot(new Timeslot(8, 11, 2022, 19, 20, 21, 40, doctorService.getAllDoctors().get(2)));
+            timeslotService.addTimeslot(new Timeslot(29, 9, 2022, 12, 50, 51, 10, doctorService.getAllDoctors().get(3)));
+            timeslotService.addTimeslot(new Timeslot(28, 6, 2022, 2, 00, 01, 15, doctorService.getAllDoctors().get(3)));
+            timeslotService.addTimeslot(new Timeslot(2, 7, 2022, 9, 30, 31, 50, doctorService.getAllDoctors().get(3)));
+            timeslotService.addTimeslot(new Timeslot(5, 8, 2022, 20, 10, 11, 30, doctorService.getAllDoctors().get(3)));
+            timeslotService.addTimeslot(new Timeslot(11, 10, 2022, 10, 20, 21, 40, doctorService.getAllDoctors().get(3)));
 
 
+            System.out.println("timeslot list" + timeslotService.getTimeslotList());
             //center1
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(0));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(1));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(2));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(3));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(4));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(5));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(6));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(7));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(8));
-            vaccinationCenterService.getAllCenters().get(0).addTimeslot(TimeslotService.getTimeslotList().get(9));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(0));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(1));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(2));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(3));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(4));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(5));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(6));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(7));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(8));
+            vaccinationCenterService.getAllCenters().get(0).addTimeslot(timeslotService.getTimeslotList().get(9));
 
             //center2
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(10));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(11));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(12));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(13));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(14));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(15));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(16));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(17));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(18));
-            vaccinationCenterService.getAllCenters().get(1).addTimeslot(TimeslotService.getTimeslotList().get(19));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(10));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(11));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(12));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(13));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(14));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(15));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(16));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(17));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(18));
+            vaccinationCenterService.getAllCenters().get(1).addTimeslot(timeslotService.getTimeslotList().get(19));
 
 
             //make reservations for 8 insured
-            reservationService.createReservation(insuredService.getInsuredByAmka("18029704689"), TimeslotService.getTimeslotList().get(0), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(0)));
-            reservationService.createReservation(insuredService.getInsuredByAmka("24121101368"), TimeslotService.getTimeslotList().get(1), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(1)));
-            reservationService.createReservation(insuredService.getInsuredByAmka("28083504789"), TimeslotService.getTimeslotList().get(2), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(2)));
-            reservationService.createReservation(insuredService.getInsuredByAmka("19036504689"), TimeslotService.getTimeslotList().get(3), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(3)));
-            reservationService.createReservation(insuredService.getInsuredByAmka("29019504689"), TimeslotService.getTimeslotList().get(10), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(10)));
-            reservationService.createReservation(insuredService.getInsuredByAmka("04118801486"), TimeslotService.getTimeslotList().get(11), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(11)));
-            reservationService.createReservation(insuredService.getInsuredByAmka("15064701124"), TimeslotService.getTimeslotList().get(15), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(15)));
-            reservationService.createReservation(insuredService.getInsuredByAmka("26048108643"), TimeslotService.getTimeslotList().get(18), vaccinationCenterService.getCenterByTimeslot(TimeslotService.getTimeslotList().get(18)));
+            reservationService.createReservation(insuredService.getInsuredByAmka("18029704689"), timeslotService.getTimeslotList().get(0), vaccinationCenterService.getCenterByTimeslot(timeslotService.getTimeslotList().get(0)));
+            reservationService.createReservation(insuredService.getInsuredByAmka("24121101368"), timeslotService.getTimeslotList().get(1), vaccinationCenterService.getCenterByTimeslot(timeslotService.getTimeslotList().get(1)));
+            reservationService.createReservation(insuredService.getInsuredByAmka("28083504789"), timeslotService.getTimeslotList().get(2), vaccinationCenterService.getCenterByTimeslot(timeslotService.getTimeslotList().get(2)));
+            reservationService.createReservation(insuredService.getInsuredByAmka("19036504689"), timeslotService.getTimeslotList().get(3), vaccinationCenterService.getCenterByTimeslot(timeslotService.getTimeslotList().get(3)));
+            reservationService.createReservation(insuredService.getInsuredByAmka("29019504689"), timeslotService.getTimeslotList().get(10), vaccinationCenterService.getCenterByTimeslot(timeslotService.getTimeslotList().get(10)));
+            reservationService.createReservation(insuredService.getInsuredByAmka("04118801486"), timeslotService.getTimeslotList().get(11), vaccinationCenterService.getCenterByTimeslot(timeslotService.getTimeslotList().get(11)));
+            reservationService.createReservation(insuredService.getInsuredByAmka("15064701124"), timeslotService.getTimeslotList().get(15), vaccinationCenterService.getCenterByTimeslot(timeslotService.getTimeslotList().get(15)));
+            reservationService.createReservation(insuredService.getInsuredByAmka("26048108643"), timeslotService.getTimeslotList().get(18), vaccinationCenterService.getCenterByTimeslot(timeslotService.getTimeslotList().get(18)));
 
            // make vaccinations for 6 out of 8 reservations
 //            vaccinationService.makeVaccination(ReservationService.getReservationList().get(0));
