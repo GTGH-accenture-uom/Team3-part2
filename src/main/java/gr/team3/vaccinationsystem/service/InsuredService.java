@@ -85,19 +85,25 @@ public class InsuredService {
     //Checks and prints if the insured person's vaccination coverage has expired
     //or not  and the expiration date depending on the vaccination they had.It
     //also checks and prints if the insured has a vaccination record
-    public  String checkHasCoverage(Insured insured) {
-        for (Vaccination vaccination1 : VaccinationService.getVaccinationslist()) {
-            if (vaccination1.getInsuredPerson().equals(insured)){
-
-                if ((vaccination1.getExpirationDate().isAfter(LocalDate.now()))) {
-                    return ("Your vaccination certificate is still valid! It expires at " + vaccination1.getExpirationDate());
+    public  String checkHasCoverage(String amka) {
+        Insured insured = getInsuredByAmka(amka);
+        if (insured == null) {
+            return "The insured with the given amka doesn't exist";
+        }
+        else
+            {
+                for (Vaccination vaccination1 : VaccinationService.getVaccinationslist()) {
+                    if (vaccination1.getInsuredPerson().equals(insured)) {
+                        if ((vaccination1.getExpirationDate().isAfter(LocalDate.now()))) {
+                            return ("Your vaccination certificate is still valid! It expires at " + vaccination1.getExpirationDate());
+                        } else
+                            return "Your vaccination coverage has expired!";
+                    }
                 }
-                else
-                    return "Your vaccination coverage has expired!";
+                return "No vaccination record found!";
             }
         }
-        return "No vaccination record found!";
-    }
+
 
 
 }

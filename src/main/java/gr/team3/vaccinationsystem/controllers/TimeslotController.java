@@ -19,15 +19,16 @@ public class TimeslotController {
     TimeslotService timeslotService = new TimeslotService();
 
 
+
     //Search free timeslots by inserting the desired day, month and year
     //Shows the free timeslots of only that day
     @GetMapping(path = "/SearchTimeslots")
-    public List<Timeslot> SearchTimeslots(@RequestParam(name = "day")int day,
-                                          @RequestParam(name="month") int month,
-                                          @RequestParam(name="year") int year){
-
+    public List<Timeslot> SearchTimeslots(@RequestParam(name = "day") int day,
+                                          @RequestParam(name= "month") int month,
+                                          @RequestParam(name= "year") int year){
         return    timeslotService.getFreeTimeslots(day,month,year);
     }
+
 
 
     //Search free timeslots by inserting the desired month and year
@@ -37,5 +38,6 @@ public class TimeslotController {
                                                  @RequestParam(name = "year") int year){
         return timeslotService.getFreeTimeslotsByMonth(month,year);
     }
+
 
 }

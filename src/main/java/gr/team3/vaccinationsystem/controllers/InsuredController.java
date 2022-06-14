@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class InsuredController {
     @Autowired
     InsuredService insuredService = new InsuredService();
-    //Check if your vaccination is valid, and it's expiration date
+
+
+
+    //Check if your vaccination is valid, and it's expiration date by inserting
+    //your amka
     @GetMapping(path = "/checkHasCoverage")
     public  String checkHasCoverage(@RequestParam(name = "amka") String amka) {
-        Insured insured = insuredService.getInsuredByAmka(amka);
-        if (insured == null){
-            return "The insured with the given amka doesn't exist";
-        } else
-            return insuredService.checkHasCoverage(insured);
+        return insuredService.checkHasCoverage(amka);
     }
+
+
 }

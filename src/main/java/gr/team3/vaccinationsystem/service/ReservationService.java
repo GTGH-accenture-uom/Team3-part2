@@ -157,6 +157,9 @@ public class ReservationService {
         }
         return customReservations;
     }
+
+
+
     public List<String> getReservationListByDay(int day, int month, int year) {
         List<Reservation> reservationByDay = new ArrayList<>();
         for(Reservation reservation : reservationList){

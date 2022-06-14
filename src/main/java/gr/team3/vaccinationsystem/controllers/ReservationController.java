@@ -102,7 +102,6 @@ public class ReservationController {
     public List<String> reservationByDay(@RequestParam(name = "day")int day,
                                           @RequestParam(name="month") int month,
                                           @RequestParam(name="year") int year){
-
         return    reservationService.getReservationListByDay(day,month,year);
     }
 
