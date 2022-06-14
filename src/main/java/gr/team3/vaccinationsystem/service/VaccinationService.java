@@ -39,7 +39,7 @@ public class VaccinationService {
         return "created vaccination!";
     }
 
-    public static List<Vaccination> getVaccinationslist() {
+    public List<Vaccination> getVaccinationslist() {
         return vaccinationslist;
     }
 
@@ -57,4 +57,14 @@ public class VaccinationService {
         return null;
     }
 
+    public void setVaccinationList(List<Vaccination> list) {
+        vaccinationslist = list;
+    }
+
+    public List<Object> getAllAsObjects() {
+
+        List<Object> list = new ArrayList<>();
+        list.addAll(vaccinationslist);
+        return list;
+    }
 }

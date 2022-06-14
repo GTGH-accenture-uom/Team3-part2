@@ -26,7 +26,7 @@ public class TimeslotService {
         return timeslotList;
     }
 
-    public static void setTimeslotList(List<Timeslot> timeslotList) {
+    public void setTimeslotList(List<Timeslot> timeslotList) {
         TimeslotService.timeslotList = timeslotList;
     }
 
@@ -108,4 +108,9 @@ public class TimeslotService {
     }
 
 
+    public List<Object> getAllTimeslotsAsObjects() {
+        List<Object> list = new ArrayList<>();
+        list.addAll(timeslotList);
+        return list;
+    }
 }

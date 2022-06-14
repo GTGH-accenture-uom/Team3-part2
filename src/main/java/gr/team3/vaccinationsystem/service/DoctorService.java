@@ -2,10 +2,8 @@ package gr.team3.vaccinationsystem.service;
 
 
 import gr.team3.vaccinationsystem.model.Doctor;
-import gr.team3.vaccinationsystem.model.Insured;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,5 +74,15 @@ public class DoctorService {
                 doctors.add(doctor);
         }
         return doctors;
+    }
+
+    public void setDoctorList(List<Doctor> list) {
+        doctorsList = list;
+    }
+
+    public List<Object> getAllDoctorsAsObjects() {
+        List<Object> list = new ArrayList<>();
+        list.addAll(doctorsList);
+        return list;
     }
 }

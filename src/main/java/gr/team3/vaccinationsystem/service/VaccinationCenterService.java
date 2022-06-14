@@ -94,4 +94,15 @@ public class VaccinationCenterService {
             return "Center doesn't exist";
         }
     }
+
+    public void setVaccinationCenterList(List<VaccinationCenter> list) {
+        vaccinationCenterList = list;
+    }
+
+    public List<Object> getAllAsObjects() {
+
+        List<Object> list = new ArrayList<>();
+        list.addAll(vaccinationCenterList);
+        return list;
+    }
 }
