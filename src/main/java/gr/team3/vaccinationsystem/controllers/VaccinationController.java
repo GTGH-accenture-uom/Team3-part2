@@ -3,14 +3,18 @@ package gr.team3.vaccinationsystem.controllers;
 import gr.team3.vaccinationsystem.model.Insured;
 import gr.team3.vaccinationsystem.model.Reservation;
 import gr.team3.vaccinationsystem.model.Timeslot;
+import gr.team3.vaccinationsystem.model.Vaccination;
 import gr.team3.vaccinationsystem.service.InsuredService;
 import gr.team3.vaccinationsystem.service.ReservationService;
 import gr.team3.vaccinationsystem.service.TimeslotService;
 import gr.team3.vaccinationsystem.service.VaccinationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class VaccinationController {
@@ -23,6 +27,7 @@ public class VaccinationController {
     InsuredService insuredService = new InsuredService();
     @Autowired
     VaccinationService vaccinationService = new VaccinationService();
+
 
 
     //done check if vaccination already done
@@ -43,4 +48,20 @@ public class VaccinationController {
 
         return vaccinationService.makeVaccination(reservation,exp_date);
     }
+
+    //Get the list of all the vaccinations
+    //http://localhost:8181/vaccinationList
+    //TODO mazi me ton giatro fernei kaiola ta timeslot tou!
+    @GetMapping(path = "/vaccinationList")
+    public List<Vaccination> getVaccinationList(){
+        return vaccinationService.getVaccinationslist();
+    }
+
+    //GetVaccination of each insured person
+    //http://localhost:8181/getVaccinationByamka?amka=18029704689
+    @GetMapping(path="/getVaccinationByamka")
+    public Vaccination getVaccinationbyAmka(@RequestParam(name = "amka") String amka){
+        return vaccinationService.getVaccinationbyAmka(amka);
+    }
+
 }

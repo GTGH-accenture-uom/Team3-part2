@@ -58,6 +58,20 @@ public class ReservationService {
         reservationList.remove(reservation);
     }
 
+    //Deletes a reservation that already exists using the insured's amka
+    public String deleteReservationByAmka(String amka){
+        for (Reservation reservation: reservationList){
+            if (reservation.getInsuredPerson().getAmka().equals(amka)){
+                reservation.getTimeslot().setFree(true);
+                reservationList.remove(reservation);
+                return "Delete this reservation!";
+            }else{
+                return "There is no reservation for this amka!";
+            }
+        }
+        return null;
+    }
+
 
     /*
     This method returns the reservations made to a certain Vaccinations Center, based
@@ -167,7 +181,7 @@ public class ReservationService {
     public List<String> getReservationListByDay(int day, int month, int year) {
         List<Reservation> reservationByDay = new ArrayList<>();
         for(Reservation reservation : reservationList){
-                if((reservation.getTimeslot().getDay() == day) &&  (reservation.getTimeslot().getMonth() == month) &&  (reservation.getTimeslot().getYear() == year )){
+                if((reservation.getTimeslot().getDay() == day) &&  (reservation.getTimeslot().getMonth() == month) &&  (reservation.getTimeslot().getYear() == year )) {
                     reservationByDay.add(reservation);
                 }
         }

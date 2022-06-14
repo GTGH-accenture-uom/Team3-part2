@@ -57,4 +57,13 @@ public class VaccinationService {
         return null;
     }
 
+    public Vaccination getVaccinationbyAmka(String amka) {
+        for(Vaccination vaccination:vaccinationslist){
+            if(vaccination.getInsuredPerson().getAmka().equals(amka)){
+                return vaccination;
+            }
+        }
+        return null;
+    }
+
 }
