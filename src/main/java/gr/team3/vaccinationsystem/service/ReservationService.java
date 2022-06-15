@@ -35,14 +35,17 @@ public class ReservationService {
     /* creates a new reservation that an insured person made to a certain timeslot and adds it
      * to the list. Sets the corresponding timeslot isFree field to false so that it appears
      * as unavailable/booked*/
-    public String createReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
-        if (insured != null && timeslot.isFree()) {
-            reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, center));
+    public String createReservation(String amka, Integer ID) {
+        TimeslotService timeslotService = new TimeslotService();
+        Insured insured = new InsuredService().getInsuredByAmka(amka);
+        Timeslot timeslot = timeslotService.getTimeslotbyID(ID);
+        if (timeslot.isFree()) {
+            reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, new VaccinationCenterService().getCenterByTimeslot(timeslot)));
             timeslot.setFree(false);
             insured.increaseResCount();
             return "reservation created!";
         }else{
-            return "cannot make reservation!";
+            return "This timeslot in not available!";
         }
 
     }
@@ -129,9 +132,17 @@ public class ReservationService {
 
 
     //Changes a reservation
-    public String changeReservation(Insured insured) {
-            deleteReservation(insured);
-            return "Deleted successfully";
+    public String changeReservation(String amka) {
+        InsuredService insuredService = new InsuredService();
+        Insured insured = insuredService.getInsuredByAmka(amka);
+        if (insured == null)
+            return "insured with the given amka doesn't exist";
+        else {
+            if (insured.getCount() < 3) {
+                deleteReservation(insured);
+                return "Deleted successfully";
+            } else return "You can't change your reservation again!";
+        }
     }
 
 
@@ -212,6 +223,31 @@ public class ReservationService {
         list.addAll(reservationList);
         return list;
     }
+
+    public String checkAllData(String amka, Integer ID, String doctor_name, String surname) {
+        InsuredService insuredService =new InsuredService();
+        Insured insured = insuredService.getInsuredByAmka(amka);
+        if (insured == null)
+            return "insured with the given amka doesn't exist";
+        if (insured.checkIfHasReservation())
+            return "you already have a reservation";
+        List<String> name_surname = new ArrayList<>();
+        name_surname.add(doctor_name);
+        name_surname.add(surname);
+        DoctorService doctorService =  new DoctorService();
+        Doctor doctor = doctorService.getDoctorByNameSurname(name_surname);
+        if (doctor == null){
+            return "there is no doctor with such name and surname";
+        }
+        TimeslotService timeslotService = new TimeslotService();
+        Timeslot timeslot = timeslotService.getTimeslotbyID(ID);
+        if (timeslot == null)
+            return "there is not such timeslot";
+        if (! doctor.checkifDoctorIsInTimeslot(timeslot))
+            return  "this Doctor does not belong to the given Timeslot";
+        return "";
+    }
+
 }
 
 

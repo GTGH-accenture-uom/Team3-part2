@@ -18,43 +18,23 @@ public class ReservationController {
 
     @Autowired
     ReservationService reservationService = new ReservationService();
-    @Autowired
-    InsuredService insuredService = new InsuredService();
-    @Autowired
-    DoctorService doctorService = new DoctorService();
-    @Autowired
-    TimeslotService timeslotService = new TimeslotService();
-    @Autowired
-    VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
 
 
-    //DONE CHECK IF DOCTOR BELONGS TO THE GIVEN TIMESLOT
-    //DONE CHECK IF INSURED  HAS ALREADY MADE A RESERVATION
+
+
     //http://localhost:8181/createReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
     @PostMapping(path = "/createReservation")
     public String createReservation(@RequestParam (name = "amka") String amka,
-                                    @RequestParam(name = "timeslot") String date,
+                                    @RequestParam(name = "timeslot") Integer ID,
                                     @RequestParam(name = "doctor_name") String doctor_name,
                                     @RequestParam(name = "doctor_surname") String doctor_surname){
-        Insured insured = insuredService.getInsuredByAmka(amka);
-        if (insured == null)
-                return "insured with the given amka doesn't exist";
-        if (insured.checkIfHasReservation())
-            return "you already have a reservation";
-        List<String> name_surname = new ArrayList<>();
-        name_surname.add(doctor_name);
-        name_surname.add(doctor_surname);
-        Doctor doctor = doctorService.getDoctorByNameSurname(name_surname);
-        if (doctor == null){
-            return "there is no doctor with such name and surname";
+        String message = reservationService.checkAllData(amka,ID,doctor_name,doctor_surname);
+        if (message.equals("")) {
+            return reservationService.createReservation(amka, ID);
+
         }
-        Timeslot timeslot = timeslotService.getTimeslotByDateTime(date);
-        if (timeslot == null)
-            return "there is not such timeslot";
-        if (! doctor.checkifDoctorIsInTimeslot(timeslot))
-            return  "this Doctor does not belong to the given Timeslot";
-         return reservationService.createReservation(insured,timeslot,vaccinationCenterService.getCenterByTimeslot(timeslot));
-        //return "reservation created!";
+        else
+            return message;
     }
 
 
@@ -62,31 +42,17 @@ public class ReservationController {
     //http://localhost:8181/changeReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
     @PostMapping(path = "/changeReservation")
     public String changeReservation(@RequestParam (name = "amka") String amka,
-                                    @RequestParam(name = "timeslot") String date,
+                                    @RequestParam(name = "timeslot") Integer ID,
                                     @RequestParam(name = "doctor_name") String doctor_name,
                                     @RequestParam(name = "doctor_surname") String doctor_surname){
 
-        Insured insured = insuredService.getInsuredByAmka(amka);
-        if (insured == null)
-            return "insured with the given amka doesn't exist";
-        List<String> name_surname = new ArrayList<>();
-        name_surname.add(doctor_name);
-        name_surname.add(doctor_surname);
-        Doctor doctor = doctorService.getDoctorByNameSurname(name_surname);
-        if (doctor == null){
-            return "there is no doctor with such name and surname";
-        }
-        Timeslot timeslot = timeslotService.getTimeslotByDateTime(date);
-        if (timeslot == null || !timeslot.isFree())
-            return "there is not such timeslot";
-        if (! doctor.checkifDoctorIsInTimeslot(timeslot))
-            return  "this Doctor does not belong to the given Timeslot";
-        if(insured.getCount()<3){
-            reservationService.changeReservation(insured);
-            reservationService.createReservation(insured,timeslot,vaccinationCenterService.getCenterByTimeslot(timeslot));
+        String message = reservationService.checkAllData(amka,ID,doctor_name,doctor_surname);
+        if (message.equals("")){
+            reservationService.changeReservation(amka);
+            reservationService.createReservation(amka,ID);
             return "reservation updated!";
         }else {
-            return "You can't change your reservation again!";
+            return message;
         }
 
     }
