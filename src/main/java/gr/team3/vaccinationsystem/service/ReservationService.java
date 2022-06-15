@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /*
@@ -35,11 +36,7 @@ public class ReservationService {
      * as unavailable/booked*/
 
     public String createReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
-//        System.out.println(insured);
-//        System.out.println(timeslot);
-//        System.out.println(center);
-        Pattern amkaPattern = Pattern.compile("\\d{11}");
-        if (insured != null && amkaPattern.matcher(insured.getAmka()).matches() && timeslot.isFree()) {
+        if (insured != null && timeslot.isFree()) {
             reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, center));
             timeslot.setFree(false);
             insured.increaseResCount();
@@ -150,14 +147,22 @@ public class ReservationService {
 
 
     public Reservation getReservationByAmkaAndTimeslot(String amka, Timeslot timeslot) {
-        for (Reservation res:reservationList) {
-            if (this.getReservationByAmka(amka).equals(res) && res.getTimeslot().equals(timeslot))
-                return res;
+       Reservation t1 = this.getReservationByTimeslotID(timeslot.getID());
+       Reservation t2 = this.getReservationByAmka(amka);
+       if (t1.equals(t2)){
+           return t1;
+        }
+       return null;
+    }
+
+    private Reservation getReservationByTimeslotID(Integer ID) {
+        for (Reservation reservation : reservationList) {
+            if (reservation.getTimeslot().getID().equals(ID)) {
+                return reservation;
+            }
         }
         return null;
     }
-
-
 
 
     public List<String> getFutureReservationList() {

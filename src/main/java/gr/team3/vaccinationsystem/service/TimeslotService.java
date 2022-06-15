@@ -88,7 +88,7 @@ public class TimeslotService {
         return null;
     }
 
-    public Timeslot getTimeslotbyID(int ID) {
+    public Timeslot getTimeslotbyID(Integer ID) {
         for (Timeslot t: timeslotList) {
             if (t.getID().equals(ID))
                 return t;

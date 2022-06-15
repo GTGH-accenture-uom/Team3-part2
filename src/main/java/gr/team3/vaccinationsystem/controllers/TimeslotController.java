@@ -18,13 +18,14 @@ public class TimeslotController {
 
 
 
-
+    //TODO Create without Doctor
     //Creates a new timeslot
     //http://localhost:8181/createTimeslot
     @PostMapping(path = "/createTimeslot")
     public String createTimeslot(@RequestBody Timeslot timeslot){
         return timeslotService.addTimeslot(timeslot);
     }
+
 
     //Get the list of all the timeslots
     //http://localhost:8181/timeslots
@@ -35,7 +36,7 @@ public class TimeslotController {
 
     //Delete a timeslot
     //http://localhost:8181/deleteTimeslot?ID=1
-    @PostMapping(path = "/deleteTimeslot")
+    @DeleteMapping(path = "/deleteTimeslot")
     public String deleteTimeslot(@RequestParam(name = "ID") Integer ID){
         return timeslotService.deleteTimeslotByID(ID);
     }

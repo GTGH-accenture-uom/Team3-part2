@@ -93,7 +93,7 @@ public class ReservationController {
 
     //Delete a reservation by amka
     //http//localhost:8181/deleteReservation?amka=22024204689
-    @PostMapping(path = "/deleteReservationByAmka")
+    @DeleteMapping(path = "/deleteReservationByAmka")
     public String deleteReservationByAmka(@RequestParam(name = "amka") String amka){
         return reservationService.deleteReservationByAmka(amka);
     }

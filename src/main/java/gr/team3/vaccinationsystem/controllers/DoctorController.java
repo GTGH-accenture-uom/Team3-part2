@@ -14,8 +14,10 @@ public class DoctorController {
     @Autowired
     DoctorService doctorService = new DoctorService();
 
-    //Creates a new insured doctor
-    //http//localhost:8181/createDoctor?
+    //TODO assign timeslot to doctor endpoint
+
+    //Creates a new  doctor
+    //http://localhost:8181/createDoctor?
     @PostMapping(path = "/createDoctor")
     public String createDoctor(@RequestBody Doctor doctor){
         doctorService.createDoctor(doctor.getAmka(),doctor.getName(),doctor.getSurname());
@@ -23,22 +25,22 @@ public class DoctorController {
     }
 
     //Get the list of all the doctors
-    //http//localhost:8181/doctorsList
+    //http://localhost:8181/doctorsList
     @GetMapping(path = "/doctorsList")
     public List<Doctor> getAllDoctors(){
         return doctorService.getAllDoctors();
     }
 
     //Delete a doctor
-    //http//localhost:8181/deleteDoctor?amka=084978592
-    @PostMapping(path = "/deleteDoctor")
+    //http://localhost:8181/deleteDoctor?amka=084978592
+    @DeleteMapping(path = "/deleteDoctor")
     public String deleteDoctorByAmka(@RequestParam(name = "amka") String amka){
         return doctorService.deleteDoctorByAmka(amka);
     }
 
 
     //Show a doctor by amka
-    //http//localhost:8181/showDoctor?amka=084978592
+    //http://localhost:8181/showDoctor?amka=084978592
     @GetMapping(path = "/showDoctorByAmka")
     public Doctor showDoctorByAmka(@RequestParam(name = "amka") String amka){
         return doctorService.getDoctorByAmka(amka);
@@ -46,7 +48,7 @@ public class DoctorController {
 
 
     //Show a doctor by name
-    //http//localhost:8181/showDoctorByName?name=Ioannis
+    //http://localhost:8181/showDoctorByName?name=Ioannis
     @GetMapping(path = "/showDoctorByName")
     public List<Doctor> showDoctorByName(@RequestParam(name = "name") String name){
         return doctorService.getDoctorByName(name);
@@ -54,7 +56,7 @@ public class DoctorController {
 
 
     //Show a doctor by surname
-    //http//localhost:8181/showDoctorBySurname?name=Petrou
+    //http://localhost:8181/showDoctorBySurname?name=Petrou
     @GetMapping(path = "/showDoctorBySurname")
     public List<Doctor> showDoctorBySurname(@RequestParam(name = "surname") String surname){
         return doctorService.showDoctorBySurname(surname);

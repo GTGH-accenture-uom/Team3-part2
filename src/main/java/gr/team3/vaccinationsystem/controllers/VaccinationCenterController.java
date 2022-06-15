@@ -4,10 +4,7 @@ import gr.team3.vaccinationsystem.model.Timeslot;
 import gr.team3.vaccinationsystem.model.VaccinationCenter;
 import gr.team3.vaccinationsystem.service.VaccinationCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ public class VaccinationCenterController {
     @Autowired
     VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
 
+    //TODO assign timeslot to center endpoint
 
     //Creates a new center
     //http://localhost:8181/createCenter
@@ -33,7 +31,7 @@ public class VaccinationCenterController {
 
     //Delete a center by code
     //http://localhost:8181/deleteCenter?code=1
-    @PostMapping(path = "/deleteCenter")
+    @DeleteMapping(path = "/deleteCenter")
     public String deleteCenter(@RequestParam(name = "code") String code){
         return vaccinationCenterService.deleteCenterByCode(code);
     }

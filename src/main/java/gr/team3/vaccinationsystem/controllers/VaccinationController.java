@@ -37,12 +37,14 @@ public class VaccinationController {
                                     @RequestParam(name = "amka") String amka,
                                     @RequestParam(name = "expiration_date") String exp_date){
         Timeslot timeslot = timeslotService.getTimeslotbyID(ID);
+        System.out.println(timeslot);
         if (timeslot == null)
             return "Timeslot with ID: " + ID + " doesn't exist";
         Insured insured = insuredService.getInsuredByAmka(amka);
         if (insured == null)
             return "insured with the given amka doesn't exist";
         Reservation reservation = reservationService.getReservationByAmkaAndTimeslot(amka, timeslot);
+        //System.out.println(reservation);
         if (reservation == null)
             return "there is not such reservation with the given amka and timeslot";
 
@@ -51,10 +53,9 @@ public class VaccinationController {
 
     //Get the list of all the vaccinations
     //http://localhost:8181/vaccinationList
-    //TODO mazi me ton giatro fernei kaiola ta timeslot tou!
     @GetMapping(path = "/vaccinationList")
-    public List<Vaccination> getVaccinationList(){
-        return vaccinationService.getVaccinationslist();
+    public List<String> getVaccinationList(){
+        return vaccinationService.getCustomVaccinationslist();
     }
 
     //GetVaccination of each insured person

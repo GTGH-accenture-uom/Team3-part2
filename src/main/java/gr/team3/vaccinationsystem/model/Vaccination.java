@@ -56,6 +56,14 @@ public class Vaccination implements Serializable {
     }
 
 
+    public String getData() {
+        StringBuilder data= new StringBuilder();
+        data.append("amka: " +insuredPerson.toString()+"  ");
+        data.append("Vaccination date: " + vaccinationDate+ " ");
+        data.append("Expiration date: " +expirationDate + " ");
+        data.append("doctor: " +doctor.getName()+" "+doctor.getSurname()+"  ");
+        return data.toString();
     }
+}
 
 

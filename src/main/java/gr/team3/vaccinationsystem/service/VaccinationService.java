@@ -78,4 +78,11 @@ public class VaccinationService {
         return null;
     }
 
+    public List<String> getCustomVaccinationslist() {
+        List<String> customList = new ArrayList<>();
+        for (Vaccination vaccination:vaccinationslist) {
+            customList.add(vaccination.getData());
+        }
+        return customList;
+    }
 }
