@@ -54,7 +54,7 @@ public class DoctorController {
 
 
     //Show a doctor by amka
-    //http://localhost:8181/showDoctor?amka=084978592
+    //http://localhost:8181/showDoctorByAmka?amka=084978592
     @GetMapping(path = "/showDoctorByAmka")
     public Doctor showDoctorByAmka(@RequestParam(name = "amka") String amka){
         return doctorService.getDoctorByAmka(amka);

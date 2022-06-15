@@ -63,9 +63,9 @@ public class Doctor implements Serializable {
                 "amka='" + amka + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+
                 '}';
     }
-
 
     //This method is used to print the vaccinations done by the doctor
     public List<String> printDoneVaccinations(){

@@ -1,6 +1,7 @@
 package gr.team3.vaccinationsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import gr.team3.vaccinationsystem.service.DoctorService;
 import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,7 @@ public class Timeslot implements Serializable {
     private boolean isFree;
 
 
+
     public Timeslot(int day, int month, int year, int hour, int minutes, int startMinute, int endMinute, Doctor doctor) {
         this.day = day;
         this.month = month;
@@ -40,7 +42,7 @@ public class Timeslot implements Serializable {
     }
 
 
-    public Timeslot(int day, int month, int year, int hour, int minutes, int startMinute, int endMinute) {
+    public Timeslot(int day, int month, int year, int hour, int minutes, int startMinute, int endMinute,String amka) {
         this.day = day;
         this.month = month;
         this.year = year;
@@ -49,6 +51,9 @@ public class Timeslot implements Serializable {
         this.startMinute = startMinute;
         this.endMinute = endMinute;
         isFree = true;
+        DoctorService doctorService = new DoctorService();
+        this.doctor=doctorService.getDoctorByAmka(amka);
+
     }
 
 

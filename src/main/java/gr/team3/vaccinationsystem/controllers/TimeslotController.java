@@ -70,8 +70,8 @@ public class TimeslotController {
     //Shows the free timeslots of that whole month
     //http://localhost:8181/SearchTimeslotsByMonth
     @GetMapping(path = "/SearchTimeslotsByMonth")
-    public List<Timeslot> SearchTimeslotsByMonth(@RequestParam(name = "month") int month,
-                                                 @RequestParam(name = "year") int year){
+    public List<Timeslot> SearchTimeslotsByMonth(@RequestParam(name = "month") Integer month,
+                                                 @RequestParam(name = "year") Integer year){
         return timeslotService.getFreeTimeslotsByMonth(month,year);
     }
 

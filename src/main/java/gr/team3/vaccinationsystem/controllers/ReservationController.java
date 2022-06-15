@@ -33,7 +33,7 @@ public class ReservationController {
     //http://localhost:8181/createReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
     @PostMapping(path = "/createReservation")
     public String createReservation(@RequestParam (name = "amka") String amka,
-                                    @RequestParam(name = "timeslot") Integer ID,
+                                    @RequestParam(name = "ID") Integer ID,
                                     @RequestParam(name = "doctor_name") String doctor_name,
                                     @RequestParam(name = "doctor_surname") String doctor_surname){
         String message = reservationService.checkAllData(amka,ID,doctor_name,doctor_surname);
@@ -105,7 +105,7 @@ public class ReservationController {
 
 
     //Get all future reservations
-    //localhost:8181/futureReservations
+    //http://localhost:8181/futureReservations
     @GetMapping("/futureReservations")
     public List<String> getFutureReservations(){
 
@@ -114,7 +114,7 @@ public class ReservationController {
 
 
     //Get reservation list by day
-    //localhost:8181/reservationByDay?day=6&month=9&year=2022
+    //http://localhost:8181/reservationByDay?day=6&month=9&year=2022
     @GetMapping(path = "/reservationListByDay")
     public List<String> reservationListByDay(@RequestParam(name = "day")int day,
                                           @RequestParam(name="month") int month,

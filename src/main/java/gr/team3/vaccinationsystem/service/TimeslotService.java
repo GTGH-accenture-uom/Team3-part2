@@ -49,10 +49,10 @@ public class TimeslotService {
 
 
     //This is a method that gets all the free timeslots by month and year
-    public  List<Timeslot> getFreeTimeslotsByMonth(int month, int year) {
+    public  List<Timeslot> getFreeTimeslotsByMonth(Integer month, Integer year) {
         List<Timeslot> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
-            if ((timeslot.getMonth() == month) &&  (timeslot.getYear() == year) && timeslot.isFree()) {
+            if ((timeslot.getMonth().equals(month) ) &&  (timeslot.getYear().equals(year)) && timeslot.isFree()) {
                 freeTimeslots.add(timeslot);
             }
         }
@@ -62,9 +62,10 @@ public class TimeslotService {
 
     //This method adds all timeslots in the list
     public String addTimeslot(Timeslot timeslot){
+        timeslot.setFree(true);
         if (timeslot.getLocalDate().isBefore(LocalDate.now()))
                 return "Invalid date";
-        timeslot.setID(ID++);
+        timeslot.setID((timeslotList.get(timeslotList.size()-1).getID())+1);
         timeslotList.add(timeslot);
         try {
             FileParser.writeAll(this.getAllTimeslotsAsObjects());

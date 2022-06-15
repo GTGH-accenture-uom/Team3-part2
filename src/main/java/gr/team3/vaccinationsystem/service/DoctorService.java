@@ -72,7 +72,7 @@ public class DoctorService {
     //Gets doctor by amka
     public  Doctor getDoctorByAmka(String amka) {
         for (Doctor doctor:doctorsList) {
-            if ( doctor.getSurname().equals(amka))
+            if ( doctor.getAmka().equals(amka))
                 return doctor;
         }
         return null;
@@ -83,7 +83,7 @@ public class DoctorService {
     public List<Doctor> getDoctorByName(String name) {
         List<Doctor> doctors = new ArrayList<>();
         for (Doctor doctor : doctorsList) {
-            if ( doctor.getSurname().equals(name))
+            if ( doctor.getName().equals(name))
                 doctors.add(doctor);
         }
         return doctors;
@@ -125,6 +125,7 @@ public class DoctorService {
                 return "This timeslot already has a doctor assigned";
             }else {
                 timeslot.setDoctor(doctor);
+                doctor.addTimeslot(timeslot);
                 try {
                     FileParser.writeAll(timeslotService.getAllTimeslotsAsObjects());
                 } catch (IOException e) {

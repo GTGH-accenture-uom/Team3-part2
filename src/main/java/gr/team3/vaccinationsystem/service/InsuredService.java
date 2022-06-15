@@ -26,7 +26,7 @@ public class InsuredService {
 
 
     //creates new Insured object and adds it to the list
-    public void createInsured(String afm, String amka, String name, String surname, LocalDate birthdate, String email)
+    public String createInsured(String afm, String amka, String name, String surname, LocalDate birthdate, String email)
     {
         Pattern amkaPattern = Pattern.compile("\\d{11}");
         if(getInsuredByAmka(amka)== null){
@@ -38,11 +38,12 @@ public class InsuredService {
                     throw new RuntimeException(e);
                 }
             }else{
-                System.out.println("Amka is not valid");
+                return "Amka is not valid";
             }
 
         }
 
+        return "Done!";
     }
 
 
