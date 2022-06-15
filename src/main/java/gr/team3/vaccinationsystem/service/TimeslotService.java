@@ -1,5 +1,6 @@
 package gr.team3.vaccinationsystem.service;
 
+import gr.team3.vaccinationsystem.FileParser;
 import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Insured;
 import gr.team3.vaccinationsystem.model.Timeslot;
@@ -7,6 +8,7 @@ import gr.team3.vaccinationsystem.model.VaccinationCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -64,6 +66,11 @@ public class TimeslotService {
                 return "Invalid date";
         timeslot.setID(ID++);
         timeslotList.add(timeslot);
+        try {
+            FileParser.writeAll(this.getAllTimeslotsAsObjects());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return "timeslot created successfully!";
     }
 
@@ -111,6 +118,11 @@ public class TimeslotService {
     //This method deletes all timeslots by id
     public String deleteTimeslotByID(Integer id) {
         if (timeslotList.removeIf(timeslot -> timeslot.getID().equals(id))) {
+            try {
+                FileParser.writeAll(this.getAllTimeslotsAsObjects());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             return "deleted successfully!";
         }
         else {

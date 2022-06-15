@@ -1,10 +1,12 @@
 package gr.team3.vaccinationsystem.service;
 
 
+import gr.team3.vaccinationsystem.FileParser;
 import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Timeslot;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +18,21 @@ such as the creation of a doctor.
 @Service
 public class DoctorService {
 
-    private List<Doctor> doctorsList = new ArrayList<>();
+    private static List<Doctor> doctorsList = new ArrayList<>();
 
 
-    public void createDoctor(String amka, String name, String surname){
+    public String createDoctor(String amka, String name, String surname){
+        for (Doctor doctor:doctorsList){
+            if (doctor.getAmka().equals(amka))
+                return "Dr with this amka already exists!";
+        }
         doctorsList.add(new Doctor(amka,name,surname));
+        try {
+            FileParser.writeAll(this.getAllDoctorsAsObjects());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return "Doctor created!";
     }
 
 
@@ -47,6 +59,11 @@ public class DoctorService {
         else
         {
            doctorsList.remove(doctor);
+            try {
+                FileParser.writeAll(this.getAllDoctorsAsObjects());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             return "Doctor with the: " + amka + " amka successfully deleted";
         }
     }

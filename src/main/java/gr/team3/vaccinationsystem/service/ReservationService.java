@@ -1,9 +1,11 @@
 package gr.team3.vaccinationsystem.service;
 
 
+import gr.team3.vaccinationsystem.FileParser;
 import gr.team3.vaccinationsystem.model.*;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +29,8 @@ public class ReservationService {
         return reservationList;
     }
 
-    public void setReservationList(List<Reservation> reservationList) {
-        this.reservationList = reservationList;
+    public void setReservationList(List<Reservation> reservations) {
+        reservationList = reservations;
     }
 
 
@@ -43,6 +45,11 @@ public class ReservationService {
             reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, new VaccinationCenterService().getCenterByTimeslot(timeslot)));
             timeslot.setFree(false);
             insured.increaseResCount();
+            try {
+                FileParser.writeAll(this.getAllResAsObjects());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             return "reservation created!";
         }else{
             return "This timeslot in not available!";
@@ -66,7 +73,12 @@ public class ReservationService {
             if (reservation.getInsuredPerson().getAmka().equals(amka)){
                 reservation.getTimeslot().setFree(true);
                 reservationList.remove(reservation);
-                return "Delete this reservation!";
+                try {
+                    FileParser.writeAll(this.getAllResAsObjects());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                return "Deleted this reservation!";
             }else{
                 return "There is no reservation for this amka!";
             }
@@ -166,9 +178,10 @@ public class ReservationService {
     public Reservation getReservationByAmkaAndTimeslot(String amka, Timeslot timeslot) {
        Reservation t1 = this.getReservationByTimeslotID(timeslot.getID());
        Reservation t2 = this.getReservationByAmka(amka);
-       if (t1.equals(t2)){
+       if (t1 == null || t2 == null)
+           return null;
+       if (t1.equals(t2))
            return t1;
-        }
        return null;
     }
 
@@ -243,11 +256,20 @@ public class ReservationService {
         Timeslot timeslot = timeslotService.getTimeslotbyID(ID);
         if (timeslot == null)
             return "there is not such timeslot";
-        if (! doctor.checkifDoctorIsInTimeslot(timeslot))
+        System.out.println(timeslot);
+        if (! timeslot.checkifDoctorisInTimeslot(doctor))
             return  "this Doctor does not belong to the given Timeslot";
         return "";
     }
 
+    public List<String> getCustomReservationList() {
+        List<String> customList = new ArrayList<>();
+        System.out.println(reservationList);
+        for (Reservation reservation:reservationList) {
+            customList.add(reservation.getData());
+        }
+        return customList;
+    }
 }
 
 

@@ -1,11 +1,13 @@
 package gr.team3.vaccinationsystem.service;
 
+import gr.team3.vaccinationsystem.FileParser;
 import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Insured;
 import gr.team3.vaccinationsystem.model.Reservation;
 import gr.team3.vaccinationsystem.model.Vaccination;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,11 @@ public class InsuredService {
         if(getInsuredByAmka(amka)== null){
             if(amkaPattern.matcher(amka).matches()){
                 insuredList.add(new Insured(afm, amka ,name, surname,birthdate, email));
-                //System.out.println("Insured created!"); this should go in controller
+                try {
+                    FileParser.writeAll(this.getAllInsuredAsObjects());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }else{
                 System.out.println("Amka is not valid");
             }
@@ -130,6 +136,11 @@ public class InsuredService {
         else
         {
             insuredList.remove(insured);
+            try {
+                FileParser.writeAll(this.getAllInsuredAsObjects());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             return "Insured with the: " + amka + " amka successfully deleted";
         }
     }

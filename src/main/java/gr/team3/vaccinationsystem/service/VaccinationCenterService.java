@@ -1,12 +1,14 @@
 
 package gr.team3.vaccinationsystem.service;
 
+import gr.team3.vaccinationsystem.FileParser;
 import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Timeslot;
 import gr.team3.vaccinationsystem.model.Vaccination;
 import gr.team3.vaccinationsystem.model.VaccinationCenter;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.temporal.JulianFields;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,11 @@ public class VaccinationCenterService {
     //Creates a vaccination list
     public String createVaccinationCenter(VaccinationCenter center) {
         this.vaccinationCenterList.add(center);
+        try {
+            FileParser.writeAll(this.getAllAsObjects());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return "created successfully!";
     }
 
@@ -96,6 +103,11 @@ public class VaccinationCenterService {
     //This method deletes the center by code
     public String deleteCenterByCode(String code) {
         if (vaccinationCenterList.removeIf(vaccinationCenter -> vaccinationCenter.getCode().equals(code))) {
+            try {
+                FileParser.writeAll(this.getAllAsObjects());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             return "deleted successfully!";
         }
         else {

@@ -21,7 +21,15 @@ public class ReservationController {
 
 
 
-
+    /*
+        This method creates an endpoint that's responsible for submitting a new
+        reservation. It receives some parameters from the URL and calls checkData() of reservationService
+        to check if all the data are valid. This method returns an error message if it finds
+        some invalid parameter, or an empty string if all the data are correct.
+        Then, it checks if the return message was the empty string, and calls
+        makeReservation of reservationService. Otherwise, it doesn't create the reservation and returns
+        the error message.
+         */
     //http://localhost:8181/createReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
     @PostMapping(path = "/createReservation")
     public String createReservation(@RequestParam (name = "amka") String amka,
@@ -31,14 +39,18 @@ public class ReservationController {
         String message = reservationService.checkAllData(amka,ID,doctor_name,doctor_surname);
         if (message.equals("")) {
             return reservationService.createReservation(amka, ID);
-
         }
         else
             return message;
     }
 
 
-    //Change the reservation
+    /*
+    This method is responsible for changing a reservation based on the parameters given by
+    the URL. First, it calls checkData and receives an error message if any of the data are invalid.
+    If the return value was an empty string, it means that all the data were valid and continues with
+    calling changeReservation() and createReservation method()
+     */
     //http://localhost:8181/changeReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
     @PostMapping(path = "/changeReservation")
     public String changeReservation(@RequestParam (name = "amka") String amka,
@@ -69,8 +81,9 @@ public class ReservationController {
     //Get the list of all the reservations
     //http://localhost:8181/reservationList
     @GetMapping(path = "/reservationList")
-    public List<Reservation> getReservations(){
-        return reservationService.getReservations();
+    public List<String> getReservations(){
+        System.out.println(reservationService.getReservations());
+        return reservationService.getCustomReservationList();
     }
 
 

@@ -66,6 +66,16 @@ public class Vaccination implements Serializable {
         data.append("doctor: " +doctor.getName()+" "+doctor.getSurname()+"  ");
         return data.toString();
     }
+
+    @Override
+    public String toString() {
+        return "Vaccination{" +
+                "insuredPerson=" + insuredPerson +
+                ", doctor=" + doctor +
+                ", vaccinationDate=" + vaccinationDate +
+                ", expirationDate=" + expirationDate +
+                '}';
+    }
 }
 
 

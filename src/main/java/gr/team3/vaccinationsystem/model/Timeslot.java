@@ -94,7 +94,7 @@ public class Timeslot implements Serializable {
     public String toString() {
         return "Timeslot{" +
                 "ID=" + ID +
-                "day=" + day +
+                ", day=" + day +
                 ", month=" + month +
                 ", year=" + year +
                 ", hour=" + hour +
@@ -115,5 +115,9 @@ public class Timeslot implements Serializable {
 
     public LocalDateTime getLocalDateWithTime() {
         return LocalDateTime.of(LocalDate.of(year,month,day), LocalTime.of(hour,minutes,0));
+    }
+
+    public boolean checkifDoctorisInTimeslot(Doctor doctor) {
+        return this.getDoctor().getAmka().equals(doctor.getAmka());
     }
 }

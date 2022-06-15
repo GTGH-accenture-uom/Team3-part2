@@ -15,7 +15,7 @@ This class represents a text file and is responsible for creating and writing in
  */
 public class FileParser {
 
-        public void writeAll(List<Object> objects) throws IOException {
+        public static void writeAll(List<Object> objects) throws IOException {
             if (!objects.get(0).toString().equals("[]")) {
                 String class_type = "";
                 class_type = objects.get(0).toString()

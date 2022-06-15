@@ -28,26 +28,26 @@ public class VaccinationController {
     @Autowired
     VaccinationService vaccinationService = new VaccinationService();
 
-
-    //done check if vaccination already done
+    /*
+    This method creates an endpoint that's responsible for submitting a new
+    vaccination. It receives some parameters from the URL and calls checkData() of vaccinationService
+    to check if all the data are valid. This method returns an error message, or just an empty string
+    if all the data are valid. Then, it checks if the return message was the empty string, and calls
+    make vaccination of vaccinationService. Otherwise, it doesn't create the vaccination and retuns
+    the error message.
+     */
     //http://localhost:8181/makeVaccination?timeslot_ID=1&amka=24121101368&expiration_date=2022-06-02
     @PostMapping(path = "/makeVaccination")
     public String makeVaccination(@RequestParam(name = "timeslot_ID") Integer ID,
                                     @RequestParam(name = "amka") String amka,
                                     @RequestParam(name = "expiration_date") String exp_date){
-        Timeslot timeslot = timeslotService.getTimeslotbyID(ID);
-        System.out.println(timeslot);
-        if (timeslot == null)
-            return "Timeslot with ID: " + ID + " doesn't exist";
-        Insured insured = insuredService.getInsuredByAmka(amka);
-        if (insured == null)
-            return "insured with the given amka doesn't exist";
-        Reservation reservation = reservationService.getReservationByAmkaAndTimeslot(amka, timeslot);
-        //System.out.println(reservation);
-        if (reservation == null)
-            return "there is not such reservation with the given amka and timeslot";
-
-        return vaccinationService.makeVaccination(reservation,exp_date);
+        String message = vaccinationService.checkData(ID, amka, exp_date);
+        if (message.equals("")) {
+            Timeslot timeslot = timeslotService.getTimeslotbyID(ID);
+            return vaccinationService.makeVaccination(reservationService.getReservationByAmkaAndTimeslot(amka, timeslot), exp_date);
+        }
+        else
+            return message;
     }
 
 

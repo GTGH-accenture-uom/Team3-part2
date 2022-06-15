@@ -24,7 +24,7 @@ public class DoctorController {
     //http://localhost:8181/assignTimeslotToDoctor?
     @PostMapping(path = "/assignTimeslotToDoctor")
     public String assignTimeslotToDoctorByAmka(@RequestParam(name = "amka") String amka,
-                                               @RequestParam(name = "id")int id){
+                                               @RequestParam(name = "ID")Integer id){
         return doctorService.assignTimeslotToDoctorByAmka(amka, id);
     }
 
@@ -33,8 +33,7 @@ public class DoctorController {
     //http://localhost:8181/createDoctor?
     @PostMapping(path = "/createDoctor")
     public String createDoctor(@RequestBody Doctor doctor){
-        doctorService.createDoctor(doctor.getAmka(),doctor.getName(),doctor.getSurname());
-        return "Done!";
+        return doctorService.createDoctor(doctor.getAmka(),doctor.getName(),doctor.getSurname());
     }
 
 

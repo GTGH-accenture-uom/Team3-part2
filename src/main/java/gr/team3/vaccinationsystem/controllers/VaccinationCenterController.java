@@ -19,7 +19,7 @@ public class VaccinationCenterController {
     //http://localhost:8181/assignTimeslotToCenter?
     @PostMapping(path = "/assignTimeslotToCenter")
     public String assignTimeslotToCenterByAmka(@RequestParam(name = "centerId") String centerCode,
-                                               @RequestParam(name = "timeslotId")int timeslotId){
+                                               @RequestParam(name = "timeslotId")Integer timeslotId){
         return vaccinationCenterService.assignTimeslotToCenter(centerCode, timeslotId);
     }
 
