@@ -2,11 +2,12 @@ package gr.team3.vaccinationsystem.model;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
 @Component
-public class Vaccination {
+public class Vaccination implements Serializable {
     Insured insuredPerson;
     Doctor doctor;
     LocalDate vaccinationDate;

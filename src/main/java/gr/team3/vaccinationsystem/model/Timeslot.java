@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Component
-public class Timeslot {
+public class Timeslot implements Serializable {
 
     private int day;
     private int month;

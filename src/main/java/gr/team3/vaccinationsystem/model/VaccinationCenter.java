@@ -2,12 +2,13 @@ package gr.team3.vaccinationsystem.model;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class VaccinationCenter {
+public class VaccinationCenter implements Serializable {
     private String code;
     private String address;
     private List<Timeslot> timeslots;

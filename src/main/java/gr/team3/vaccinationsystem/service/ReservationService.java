@@ -192,6 +192,12 @@ public class ReservationService {
         return customReservations;
     }
 
+    public List<Object> getAllResAsObjects() {
+
+        List<Object> list = new ArrayList<>();
+        list.addAll(reservationList);
+        return list;
+    }
 }
 
 

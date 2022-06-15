@@ -46,6 +46,13 @@ public class InsuredService {
         return insuredList;
     }
 
+    public List<Object> getAllInsuredAsObjects()
+    {
+        List<Object> list = new ArrayList<>();
+        list.addAll(insuredList);
+        return list;
+    }
+
 
     //Get an insured through his amka
     public Insured getInsuredByAmka(String s) {
@@ -97,12 +104,13 @@ public class InsuredService {
     //also checks and prints if the insured has a vaccination record
     public  String checkHasCoverage(String amka) {
         Insured insured = getInsuredByAmka(amka);
+        VaccinationService vaccinationService = new VaccinationService();
         if (insured == null) {
             return "The insured with the given amka doesn't exist";
         }
         else
             {
-                for (Vaccination vaccination1 : VaccinationService.getVaccinationslist()) {
+                for (Vaccination vaccination1 : vaccinationService.getVaccinationslist()) {
                     if (vaccination1.getInsuredPerson().equals(insured)) {
                         if ((vaccination1.getExpirationDate().isAfter(LocalDate.now()))) {
                             return ("Your vaccination certificate is still valid! It expires at " + vaccination1.getExpirationDate());
@@ -131,5 +139,7 @@ public class InsuredService {
     }
 
 
-
+    public void setInsuredList(List<Insured> readAllInsured) {
+        insuredList = readAllInsured;
+    }
 }

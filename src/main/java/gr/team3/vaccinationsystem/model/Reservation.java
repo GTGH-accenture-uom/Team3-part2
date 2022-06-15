@@ -5,11 +5,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.stereotype.Component;
 
 import javax.print.Doc;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 @Component
-public class Reservation {
+public class Reservation implements Serializable {
 
     Insured insuredPerson;
     @JsonIgnore
