@@ -57,6 +57,7 @@ public class VaccinationService {
         return null;
     }
 
+
     public void setVaccinationList(List<Vaccination> list) {
         vaccinationslist = list;
     }
@@ -67,4 +68,5 @@ public class VaccinationService {
         list.addAll(vaccinationslist);
         return list;
     }
+
 }

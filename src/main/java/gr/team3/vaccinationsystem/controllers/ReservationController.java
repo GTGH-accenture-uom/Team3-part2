@@ -57,6 +57,8 @@ public class ReservationController {
         //return "reservation created!";
     }
 
+
+    //Change the reservation
     //http://localhost:8181/changeReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
     @PostMapping(path = "/changeReservation")
     public String changeReservation(@RequestParam (name = "amka") String amka,
@@ -89,7 +91,38 @@ public class ReservationController {
 
     }
 
+    //Delete a reservation by amka
+    //http//localhost:8181/deleteReservation?amka=22024204689
+    @PostMapping(path = "/deleteReservationByAmka")
+    public String deleteReservationByAmka(@RequestParam(name = "amka") String amka){
+        return reservationService.deleteReservationByAmka(amka);
+    }
 
+    //Get the list of all the reservations
+    //http://localhost:8181/reservationList
+    @GetMapping(path = "/reservationList")
+    public List<Reservation> getReservations(){
+        return reservationService.getReservations();
+    }
+
+
+
+    //Get reservation by amka
+    //http://localhost:8181/getReservationByamka?amka=22024204689
+    @GetMapping(path="/getReservationByamka")
+    public Reservation getReservationByAmka(@RequestParam(name = "amka") String amka){
+        return reservationService.getReservationByAmka(amka);
+    }
+
+    //Get reservation by amka and timeslot
+    //http://localhost:8181/getReservationByamka?amka=22024204689&timeslot=2022-06-12 02:00
+    @GetMapping(path="/getReservationByAmkaAndTimeslot")
+    public Reservation getReservationByAmkaAndTimeslot(@RequestParam(name = "amka") String amka,
+                                                       @RequestParam(name = "timeslot") Timeslot timeslot){
+        return reservationService.getReservationByAmkaAndTimeslot(amka,timeslot);
+    }
+
+    //Get all future reservations
     //localhost:8181/futureReservations
     @GetMapping("/futureReservations")
     public List<String> getFutureReservations(){
@@ -97,9 +130,10 @@ public class ReservationController {
         return reservationService.getFutureReservationList();
     }
 
-    //localhost:8181/reservationByDay
-    @GetMapping(path = "/reservationByDay")
-    public List<String> reservationByDay(@RequestParam(name = "day")int day,
+    //Get reservation list by day
+    //localhost:8181/reservationByDay?day=6&month=9&year=2022
+    @GetMapping(path = "/reservationListByDay")
+    public List<String> reservationListByDay(@RequestParam(name = "day")int day,
                                           @RequestParam(name="month") int month,
                                           @RequestParam(name="year") int year){
         return    reservationService.getReservationListByDay(day,month,year);
