@@ -35,6 +35,7 @@ public class InsuredController {
         return insuredService.getAllInsured();
     }
 
+
     //Delete an insured
     //http://localhost:8181/deleteInsured?amka=084978592
     @DeleteMapping(path = "/deleteInsured")
@@ -49,7 +50,6 @@ public class InsuredController {
     public Insured showInsuredByAmka(@RequestParam(name = "amka") String amka){
         return insuredService.getInsuredByAmka(amka);
     }
-
 
 
     //Check if your vaccination is valid, and it's expiration date by inserting

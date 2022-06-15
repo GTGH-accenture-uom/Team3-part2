@@ -13,12 +13,14 @@ public class Vaccination implements Serializable {
     LocalDate vaccinationDate;
     LocalDate expirationDate;
 
+
     public Vaccination(Insured insuredPerson, Doctor doctor, LocalDate vaccinationDate, LocalDate expirationDate) {
         this.insuredPerson = insuredPerson;
         this.doctor = doctor;
         this.vaccinationDate = vaccinationDate;
         this.expirationDate = expirationDate;
     }
+
 
     public Vaccination() {
     }

@@ -29,7 +29,6 @@ public class VaccinationController {
     VaccinationService vaccinationService = new VaccinationService();
 
 
-
     //done check if vaccination already done
     //http://localhost:8181/makeVaccination?timeslot_ID=1&amka=24121101368&expiration_date=2022-06-02
     @PostMapping(path = "/makeVaccination")
@@ -51,12 +50,14 @@ public class VaccinationController {
         return vaccinationService.makeVaccination(reservation,exp_date);
     }
 
+
     //Get the list of all the vaccinations
     //http://localhost:8181/vaccinationList
     @GetMapping(path = "/vaccinationList")
     public List<String> getVaccinationList(){
         return vaccinationService.getCustomVaccinationslist();
     }
+
 
     //GetVaccination of each insured person
     //http://localhost:8181/getVaccinationByamka?amka=18029704689

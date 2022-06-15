@@ -2,8 +2,11 @@ package gr.team3.vaccinationsystem.controllers;
 
 import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Insured;
+import gr.team3.vaccinationsystem.model.Timeslot;
 import gr.team3.vaccinationsystem.service.DoctorService;
+import gr.team3.vaccinationsystem.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +16,18 @@ public class DoctorController {
 
     @Autowired
     DoctorService doctorService = new DoctorService();
+    @Autowired
+    TimeslotService timeslotService = new TimeslotService();
 
-    //TODO assign timeslot to doctor endpoint
+
+    //Assign timeslot to doctor
+    //http://localhost:8181/assignTimeslotToDoctor?
+    @PostMapping(path = "/assignTimeslotToDoctor")
+    public String assignTimeslotToDoctorByAmka(@RequestParam(name = "amka") String amka,
+                                               @RequestParam(name = "id")int id){
+        return doctorService.assignTimeslotToDoctorByAmka(amka, id);
+    }
+
 
     //Creates a new  doctor
     //http://localhost:8181/createDoctor?
@@ -24,12 +37,14 @@ public class DoctorController {
         return "Done!";
     }
 
+
     //Get the list of all the doctors
     //http://localhost:8181/doctorsList
     @GetMapping(path = "/doctorsList")
     public List<Doctor> getAllDoctors(){
         return doctorService.getAllDoctors();
     }
+
 
     //Delete a doctor
     //http://localhost:8181/deleteDoctor?amka=084978592

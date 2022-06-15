@@ -39,8 +39,22 @@ public class Timeslot implements Serializable {
 
     }
 
+
+    public Timeslot(int day, int month, int year, int hour, int minutes, int startMinute, int endMinute) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.hour = hour;
+        this.minutes = minutes;
+        this.startMinute = startMinute;
+        this.endMinute = endMinute;
+        isFree = true;
+    }
+
+
     public Timeslot() {
     }
+
 
     public  Integer getDay() {return day;}
     public  Integer getMonth() {return month;}
@@ -75,6 +89,7 @@ public class Timeslot implements Serializable {
         isFree = free;
     }
 
+
     @Override
     public String toString() {
         return "Timeslot{" +
@@ -89,11 +104,14 @@ public class Timeslot implements Serializable {
                 ", doctor=" + doctor +
                 '}';
     }
+
+
     //Gets the local date
     public LocalDate getLocalDate() {
         return LocalDate.of(year,month,day);
 
     }
+
 
     public LocalDateTime getLocalDateWithTime() {
         return LocalDateTime.of(LocalDate.of(year,month,day), LocalTime.of(hour,minutes,0));

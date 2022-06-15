@@ -21,6 +21,8 @@ public class VaccinationService {
 
     private static List<Vaccination> vaccinationslist = new ArrayList<>();
 
+
+    //This method makes a vaccination
     public String makeVaccination(Reservation reservation, String expiration_date){
         //check if vaccination already exists
         for (Vaccination vacc:vaccinationslist) {
@@ -39,12 +41,9 @@ public class VaccinationService {
         return "created vaccination!";
     }
 
+
     public List<Vaccination> getVaccinationslist() {
         return vaccinationslist;
-    }
-
-    public static void setVaccinationslist(ArrayList<Vaccination> vaccinationslist) {
-        VaccinationService.vaccinationslist = vaccinationslist;
     }
 
 
@@ -62,13 +61,16 @@ public class VaccinationService {
         vaccinationslist = list;
     }
 
+
     public List<Object> getAllAsObjects() {
 
         List<Object> list = new ArrayList<>();
         list.addAll(vaccinationslist);
         return list;
     }
-    
+
+
+    //This method returns the vaccinations by amka.
      public Vaccination getVaccinationbyAmka(String amka) {
         for(Vaccination vaccination:vaccinationslist){
             if(vaccination.getInsuredPerson().getAmka().equals(amka)){
@@ -77,6 +79,7 @@ public class VaccinationService {
         }
         return null;
     }
+
 
     public List<String> getCustomVaccinationslist() {
         List<String> customList = new ArrayList<>();

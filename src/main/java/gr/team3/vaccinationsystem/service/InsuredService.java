@@ -64,7 +64,6 @@ public class InsuredService {
     }
 
 
-
     /*
     this method finds and prints the insured people over the age of 60 that have not made
     a reservation. It iterates the insuredList, finds the people that are over 60 years old,
@@ -98,7 +97,6 @@ public class InsuredService {
     }
 
 
-
     //Checks and prints if the insured person's vaccination coverage has expired
     //or not  and the expiration date depending on the vaccination they had.It
     //also checks and prints if the insured has a vaccination record
@@ -121,8 +119,6 @@ public class InsuredService {
                 return "No vaccination record found!";
             }
         }
-
-
 
 
     //Deletes an insured that already exists using the insured amka

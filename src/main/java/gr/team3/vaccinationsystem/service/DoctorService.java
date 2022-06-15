@@ -2,6 +2,7 @@ package gr.team3.vaccinationsystem.service;
 
 
 import gr.team3.vaccinationsystem.model.Doctor;
+import gr.team3.vaccinationsystem.model.Timeslot;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class DoctorService {
         return null;
     }
 
+
     //Deletes a doctor that already exists using the doctor's amka
     public String deleteDoctorByAmka(String amka) {
         Doctor doctor = this.getDoctorByAmka(amka);
@@ -50,7 +52,8 @@ public class DoctorService {
     }
 
 
-    public Doctor getDoctorByAmka(String amka) {
+    //Gets doctor by amka
+    public  Doctor getDoctorByAmka(String amka) {
         for (Doctor doctor:doctorsList) {
             if ( doctor.getSurname().equals(amka))
                 return doctor;
@@ -58,6 +61,8 @@ public class DoctorService {
         return null;
     }
 
+
+    //Shows doctor by name
     public List<Doctor> getDoctorByName(String name) {
         List<Doctor> doctors = new ArrayList<>();
         for (Doctor doctor : doctorsList) {
@@ -67,6 +72,8 @@ public class DoctorService {
         return doctors;
     }
 
+
+    //Shows doctor by surname
     public List<Doctor> showDoctorBySurname(String surname) {
         List<Doctor> doctors = new ArrayList<>();
         for (Doctor doctor : doctorsList) {
@@ -75,6 +82,7 @@ public class DoctorService {
         }
         return doctors;
     }
+
 
     public void setDoctorList(List<Doctor> list) {
         doctorsList = list;
@@ -85,4 +93,26 @@ public class DoctorService {
         list.addAll(doctorsList);
         return list;
     }
+
+
+    //Assigns a timeslot to a certain doctor using the doctors amka and the timeslot's id
+    public String assignTimeslotToDoctorByAmka(String amka, int id) {
+        TimeslotService timeslotService = new TimeslotService();
+        Timeslot timeslot = timeslotService.getTimeslotbyID(id);
+        Doctor doctor = this.getDoctorByAmka(amka);
+        if (timeslot == null || doctor == null) {
+            return "Wrong arguments! Try again.";
+        }
+        else {
+            if (timeslot.getDoctor() != null) {
+                return "This timeslot already has a doctor assigned";
+            }else {
+                timeslot.setDoctor(doctor);
+            }
+        }
+        return  "Done!";
+    }
+
+
 }
+

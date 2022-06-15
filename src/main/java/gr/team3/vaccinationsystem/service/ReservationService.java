@@ -31,10 +31,10 @@ public class ReservationService {
         this.reservationList = reservationList;
     }
 
+
     /* creates a new reservation that an insured person made to a certain timeslot and adds it
      * to the list. Sets the corresponding timeslot isFree field to false so that it appears
      * as unavailable/booked*/
-
     public String createReservation(Insured insured, Timeslot timeslot, VaccinationCenter center) {
         if (insured != null && timeslot.isFree()) {
             reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, center));
@@ -48,12 +48,14 @@ public class ReservationService {
     }
 
 
+    //Deletes a reservation
     public void deleteReservation(Insured insured) {
 
         Reservation reservation = this.getReservationByAmka(insured.getAmka());
         reservation.getTimeslot().setFree(true);
         reservationList.remove(reservation);
     }
+
 
     //Deletes a reservation that already exists using the insured's amka
     public String deleteReservationByAmka(String amka){
@@ -88,6 +90,7 @@ public class ReservationService {
         reservationsOfCenter.forEach(System.out::println);
         return  result;
     }
+
 
     /*This method shows all the reservations that each doctor has in each center
      */
@@ -124,12 +127,15 @@ public class ReservationService {
         reservations.forEach(System.out::println);
     }
 
+
+    //Changes a reservation
     public String changeReservation(Insured insured) {
             deleteReservation(insured);
             return "Deleted successfully";
     }
 
 
+    //Gets a reservation using the insured's amka
     public Reservation getReservationByAmka(String amka) {
         for (Reservation reservation : reservationList) {
             if (reservation.getInsuredPerson().getAmka().equals(amka)) {
@@ -145,7 +151,7 @@ public class ReservationService {
     }
 
 
-
+    //Gets a reservation using the insured's amka and the timeslot
     public Reservation getReservationByAmkaAndTimeslot(String amka, Timeslot timeslot) {
        Reservation t1 = this.getReservationByTimeslotID(timeslot.getID());
        Reservation t2 = this.getReservationByAmka(amka);
@@ -155,6 +161,7 @@ public class ReservationService {
        return null;
     }
 
+    //Gets a reservation using the timeslot's id
     private Reservation getReservationByTimeslotID(Integer ID) {
         for (Reservation reservation : reservationList) {
             if (reservation.getTimeslot().getID().equals(ID)) {
@@ -165,6 +172,7 @@ public class ReservationService {
     }
 
 
+    //Gets all the reservations to come
     public List<String> getFutureReservationList() {
         List<Reservation> futureReservation = new ArrayList<>();
         for(Reservation reservation : reservationList){
@@ -182,7 +190,7 @@ public class ReservationService {
     }
 
 
-
+    //Gets the reservation list for each day
     public List<String> getReservationListByDay(int day, int month, int year) {
         List<Reservation> reservationByDay = new ArrayList<>();
         for(Reservation reservation : reservationList){
@@ -196,6 +204,7 @@ public class ReservationService {
         }
         return customReservations;
     }
+
 
     public List<Object> getAllResAsObjects() {
 

@@ -1,6 +1,7 @@
 
 package gr.team3.vaccinationsystem.service;
 
+import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Timeslot;
 import gr.team3.vaccinationsystem.model.Vaccination;
 import gr.team3.vaccinationsystem.model.VaccinationCenter;
@@ -27,6 +28,7 @@ public class VaccinationCenterService {
         this.vaccinationCenterList.add(new VaccinationCenter(code, address));
     }
 
+    //Creates a vaccination list
     public String createVaccinationCenter(VaccinationCenter center) {
         this.vaccinationCenterList.add(center);
         return "created successfully!";
@@ -35,6 +37,7 @@ public class VaccinationCenterService {
     public List<VaccinationCenter> getAllCenters() {
         return this.vaccinationCenterList;
     }
+
 
     //This method prints all the timeslot of the center with code s
     public void printTimeslotsOfCenter(String s) {
@@ -45,6 +48,7 @@ public class VaccinationCenterService {
             }
         }
     }
+
 
     //printFreeTimeslots prints all the available timeslots of the center with code s
     public List<String> printFreeTimeslots(String s) {
@@ -64,6 +68,7 @@ public class VaccinationCenterService {
         return results;
     }
 
+
     //This method returns the vaccination center with code s
     public VaccinationCenter getCenterByCode(String s) {
         for (VaccinationCenter vaccinationCenter:vaccinationCenterList) {
@@ -73,6 +78,7 @@ public class VaccinationCenterService {
         }
         return null;
     }
+
 
     //This method returns the vaccination center with the specific timeslot
 
@@ -86,6 +92,8 @@ public class VaccinationCenterService {
         return null;
     }
 
+
+    //This method deletes the center by code
     public String deleteCenterByCode(String code) {
         if (vaccinationCenterList.removeIf(vaccinationCenter -> vaccinationCenter.getCode().equals(code))) {
             return "deleted successfully!";
@@ -104,5 +112,20 @@ public class VaccinationCenterService {
         List<Object> list = new ArrayList<>();
         list.addAll(vaccinationCenterList);
         return list;
+    }
+
+
+    //Assigns a timeslot to a certain doctor using the doctors amka and the timeslot's id
+    public String assignTimeslotToCenter(String centerCode, int timeslotId) {
+        TimeslotService timeslotService = new TimeslotService();
+        Timeslot timeslot = timeslotService.getTimeslotbyID(timeslotId);
+        VaccinationCenter vaccinationCenter = this.getCenterByCode(centerCode);
+        if (timeslot == null || vaccinationCenter == null) {
+            return "Wrong arguments! Try again.";
+        }
+        else {
+                vaccinationCenter.addTimeslot(timeslot);
+        }
+        return  "Done!";
     }
 }

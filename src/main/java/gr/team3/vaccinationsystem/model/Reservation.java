@@ -21,12 +21,14 @@ public class Reservation implements Serializable {
     @JsonIgnore
     Doctor doctor;
 
+
     public Reservation(Insured insuredPerson, Doctor doctor, Timeslot timeslot, VaccinationCenter vaccinationCenter) {
         this.insuredPerson = insuredPerson;
         this.timeslot = timeslot;
         this.vaccinationCenter = vaccinationCenter;
         this.doctor = doctor;
     }
+
 
     public Reservation() {
     }
@@ -65,6 +67,7 @@ public class Reservation implements Serializable {
         this.vaccinationCenter = vaccinationCenter;
     }
 
+
     @Override
     public String toString() {
         return "Reservation{" +
@@ -74,6 +77,7 @@ public class Reservation implements Serializable {
                 ", vaccinationCenter=" + vaccinationCenter +
                 '}';
     }
+
 
     public String getData(){
         StringBuilder data= new StringBuilder();

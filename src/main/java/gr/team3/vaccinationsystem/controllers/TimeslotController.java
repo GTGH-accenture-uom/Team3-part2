@@ -2,7 +2,9 @@ package gr.team3.vaccinationsystem.controllers;
 
 import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Timeslot;
+import gr.team3.vaccinationsystem.service.DoctorService;
 import gr.team3.vaccinationsystem.service.TimeslotService;
+import gr.team3.vaccinationsystem.service.VaccinationCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +17,12 @@ import java.util.List;
 public class TimeslotController {
     @Autowired
     TimeslotService timeslotService = new TimeslotService();
+    @Autowired
+    DoctorService doctorService = new DoctorService();
+    @Autowired
+    VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
 
 
-
-    //TODO Create without Doctor
     //Creates a new timeslot
     //http://localhost:8181/createTimeslot
     @PostMapping(path = "/createTimeslot")
@@ -33,6 +37,7 @@ public class TimeslotController {
     public List<Timeslot> getAllTimeslots(){
         return timeslotService.getTimeslotList();
     }
+
 
     //Delete a timeslot
     //http://localhost:8181/deleteTimeslot?ID=1
@@ -49,8 +54,10 @@ public class TimeslotController {
         return timeslotService.getTimeslotbyID(ID);
     }
 
+
     //Search free timeslots by inserting the desired day, month and year
     //Shows the free timeslots of only that day
+    //http://localhost:8181/SearchTimeslots
     @GetMapping(path = "/SearchTimeslots")
     public List<Timeslot> SearchTimeslots(@RequestParam(name = "day") int day,
                                           @RequestParam(name= "month") int month,
@@ -59,9 +66,9 @@ public class TimeslotController {
     }
 
 
-
     //Search free timeslots by inserting the desired month and year
     //Shows the free timeslots of that whole month
+    //http://localhost:8181/SearchTimeslotsByMonth
     @GetMapping(path = "/SearchTimeslotsByMonth")
     public List<Timeslot> SearchTimeslotsByMonth(@RequestParam(name = "month") int month,
                                                  @RequestParam(name = "year") int year){

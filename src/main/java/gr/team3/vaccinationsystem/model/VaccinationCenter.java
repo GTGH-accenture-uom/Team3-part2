@@ -20,11 +20,13 @@ public class VaccinationCenter implements Serializable {
         timeslots = new ArrayList<>();
     }
 
+
     public VaccinationCenter(String code, String address, ArrayList<Timeslot> timeslots) {
         this.code = code;
         this.address = address;
         this.timeslots = timeslots;
     }
+
 
     public VaccinationCenter() {
     }
@@ -48,6 +50,7 @@ public class VaccinationCenter implements Serializable {
     public List<Timeslot> getTimeslots() { return timeslots; }
 
     public void setTimeslots(List<Timeslot> timeslots) { this.timeslots = timeslots; }
+
 
     @Override
     public String toString() {

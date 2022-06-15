@@ -23,6 +23,7 @@ public class Doctor implements Serializable {
         this.timeslots = timeslots;
     }
 
+
     public Doctor(String amka, String name, String surname) {
         this.amka = amka;
         this.name = name;
@@ -31,8 +32,10 @@ public class Doctor implements Serializable {
 
     }
 
+
     public Doctor() {
     }
+
 
     public String getAmka() {return amka;}
     public void setAmka(String amka) {this.amka = amka;}
@@ -53,6 +56,7 @@ public class Doctor implements Serializable {
         vaccinations.add(vaccination);
     }
 
+
     @Override
     public String toString() {
         return "Doctor{" +
@@ -61,6 +65,7 @@ public class Doctor implements Serializable {
                 ", surname='" + surname + '\'' +
                 '}';
     }
+
 
     //This method is used to print the vaccinations done by the doctor
     public List<String> printDoneVaccinations(){
@@ -74,6 +79,8 @@ public class Doctor implements Serializable {
         return results;
     }
 
+
+    //checks if a doctor is in a timeslot
     public boolean checkifDoctorIsInTimeslot(Timeslot timeslot) {
         for (Timeslot t:timeslots) {
             if (t.equals(timeslot))

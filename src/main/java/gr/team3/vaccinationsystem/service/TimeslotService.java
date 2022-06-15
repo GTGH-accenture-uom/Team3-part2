@@ -3,6 +3,8 @@ package gr.team3.vaccinationsystem.service;
 import gr.team3.vaccinationsystem.model.Doctor;
 import gr.team3.vaccinationsystem.model.Insured;
 import gr.team3.vaccinationsystem.model.Timeslot;
+import gr.team3.vaccinationsystem.model.VaccinationCenter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,6 +24,7 @@ public class TimeslotService {
     private static int ID;
     private static List<Timeslot> timeslotList = new ArrayList<>();
 
+
     public List<Timeslot> getTimeslotList() {
         return timeslotList;
     }
@@ -29,6 +32,7 @@ public class TimeslotService {
     public void setTimeslotList(List<Timeslot> timeslotList) {
         TimeslotService.timeslotList = timeslotList;
     }
+
 
     //This is a method that gets all the free timeslots by day, month and year
     public  List<Timeslot> getFreeTimeslots(int day, int month, int year) {
@@ -42,7 +46,6 @@ public class TimeslotService {
     }
 
 
-
     //This is a method that gets all the free timeslots by month and year
     public  List<Timeslot> getFreeTimeslotsByMonth(int month, int year) {
         List<Timeslot> freeTimeslots = new ArrayList<>();
@@ -54,6 +57,7 @@ public class TimeslotService {
         return freeTimeslots;
     }
 
+
     //This method adds all timeslots in the list
     public String addTimeslot(Timeslot timeslot){
         if (timeslot.getLocalDate().isBefore(LocalDate.now()))
@@ -63,6 +67,8 @@ public class TimeslotService {
         return "timeslot created successfully!";
     }
 
+
+    //This method gets all timeslots for each day
     public Timeslot getTimeslotByDate(LocalDate date) {
         for (Timeslot timeslot:timeslotList) {
             if (timeslot.getLocalDate().equals(date))
@@ -71,6 +77,7 @@ public class TimeslotService {
         return null;
     }
 
+
     public void printTimeslotsLocalDate(){
         for (Timeslot t:timeslotList) {
             System.out.println(t.getLocalDateWithTime() + "Dr: " +  t.getDoctor());
@@ -78,6 +85,7 @@ public class TimeslotService {
         }
     }
 
+    //This method gets all timeslots for each day and for a certain time
     public Timeslot getTimeslotByDateTime(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
@@ -88,7 +96,9 @@ public class TimeslotService {
         return null;
     }
 
-    public Timeslot getTimeslotbyID(Integer ID) {
+
+    //This method gets all timeslots by id
+    public  Timeslot getTimeslotbyID(Integer ID) {
         for (Timeslot t: timeslotList) {
             if (t.getID().equals(ID))
                 return t;
@@ -98,6 +108,7 @@ public class TimeslotService {
     }
 
 
+    //This method deletes all timeslots by id
     public String deleteTimeslotByID(Integer id) {
         if (timeslotList.removeIf(timeslot -> timeslot.getID().equals(id))) {
             return "deleted successfully!";
@@ -113,4 +124,8 @@ public class TimeslotService {
         list.addAll(timeslotList);
         return list;
     }
+
+
+
+
 }

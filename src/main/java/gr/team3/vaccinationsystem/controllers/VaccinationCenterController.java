@@ -2,6 +2,7 @@ package gr.team3.vaccinationsystem.controllers;
 
 import gr.team3.vaccinationsystem.model.Timeslot;
 import gr.team3.vaccinationsystem.model.VaccinationCenter;
+import gr.team3.vaccinationsystem.service.TimeslotService;
 import gr.team3.vaccinationsystem.service.VaccinationCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,15 @@ public class VaccinationCenterController {
     @Autowired
     VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
 
-    //TODO assign timeslot to center endpoint
+
+    //Assign timeslot to center
+    //http://localhost:8181/assignTimeslotToCenter?
+    @PostMapping(path = "/assignTimeslotToCenter")
+    public String assignTimeslotToCenterByAmka(@RequestParam(name = "centerId") String centerCode,
+                                               @RequestParam(name = "timeslotId")int timeslotId){
+        return vaccinationCenterService.assignTimeslotToCenter(centerCode, timeslotId);
+    }
+
 
     //Creates a new center
     //http://localhost:8181/createCenter
@@ -22,12 +31,14 @@ public class VaccinationCenterController {
         return vaccinationCenterService.createVaccinationCenter(center);
     }
 
+
     //Get the list of all the centers
     //http://localhost:8181/centers
     @GetMapping(path = "/centers")
     public List<VaccinationCenter> getAllCenters(){
         return vaccinationCenterService.getAllCenters();
     }
+
 
     //Delete a center by code
     //http://localhost:8181/deleteCenter?code=1

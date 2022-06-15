@@ -16,6 +16,7 @@ public class Insured implements Serializable {
     private String email;
     private int count;  //change name to reservationCount
 
+
     public Insured(String afm, String amka, String name, String surname, LocalDate birthdate, String email) {
         this.afm = afm;
         this.amka = amka;
@@ -27,7 +28,6 @@ public class Insured implements Serializable {
     }
 
 
-
     public int getCount() {
         return count;
     }
@@ -36,8 +36,10 @@ public class Insured implements Serializable {
         this.count = count;
     }
 
+
     public Insured() {
     }
+
 
     public String getAfm() {
         return afm;
@@ -87,6 +89,7 @@ public class Insured implements Serializable {
         this.email = email;
     }
 
+
     @Override
     public String toString() {
         return "Insured{" +
@@ -99,9 +102,11 @@ public class Insured implements Serializable {
                 '}';
     }
 
+
     public boolean checkIfHasReservation() {
         return count>0;
     }
+
 
     public void increaseResCount(){
         count++;
