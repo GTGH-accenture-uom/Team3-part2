@@ -21,13 +21,13 @@ such the creation of a vaccination center.
  */
 @Service
 public class VaccinationCenterService {
-    private List<VaccinationCenter> vaccinationCenterList = new ArrayList();
+    private static List<VaccinationCenter> vaccinationCenterList = new ArrayList();
 
     public VaccinationCenterService() {
     }
 
     public void createVaccinationCenter(String code, String address) {
-        this.vaccinationCenterList.add(new VaccinationCenter(code, address));
+        vaccinationCenterList.add(new VaccinationCenter(code, address));
     }
 
     //Creates a vaccination list
@@ -42,7 +42,7 @@ public class VaccinationCenterService {
     }
 
     public List<VaccinationCenter> getAllCenters() {
-        return this.vaccinationCenterList;
+        return vaccinationCenterList;
     }
 
 
@@ -137,6 +137,11 @@ public class VaccinationCenterService {
         }
         else {
                 vaccinationCenter.addTimeslot(timeslot);
+            try {
+                FileParser.writeAll(this.getAllAsObjects());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return  "Done!";
     }

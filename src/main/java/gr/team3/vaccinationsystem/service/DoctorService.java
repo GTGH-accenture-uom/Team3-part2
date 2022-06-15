@@ -125,6 +125,11 @@ public class DoctorService {
                 return "This timeslot already has a doctor assigned";
             }else {
                 timeslot.setDoctor(doctor);
+                try {
+                    FileParser.writeAll(timeslotService.getAllTimeslotsAsObjects());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         return  "Done!";

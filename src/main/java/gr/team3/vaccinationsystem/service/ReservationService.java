@@ -64,6 +64,11 @@ public class ReservationService {
         Reservation reservation = this.getReservationByAmka(insured.getAmka());
         reservation.getTimeslot().setFree(true);
         reservationList.remove(reservation);
+        try {
+            FileParser.writeAll(this.getAllResAsObjects());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -152,6 +157,7 @@ public class ReservationService {
         else {
             if (insured.getCount() < 3) {
                 deleteReservation(insured);
+
                 return "Deleted successfully";
             } else return "You can't change your reservation again!";
         }
