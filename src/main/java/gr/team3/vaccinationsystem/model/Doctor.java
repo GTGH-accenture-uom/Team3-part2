@@ -88,4 +88,12 @@ public class Doctor implements Serializable {
         }
         return false;
     }
+
+    public String getData() {
+        StringBuilder data= new StringBuilder();
+        data.append("amka: " +this.getAmka()+"  ");
+        data.append("name " + this.getName() + "  ");
+        data.append("surname: " + this.getSurname() + "  ");
+        return data.toString();
+    }
 }

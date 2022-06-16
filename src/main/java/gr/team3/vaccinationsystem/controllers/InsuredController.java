@@ -15,7 +15,7 @@ public class InsuredController {
 
 
     //Creates a new insured person
-    //http://localhost:8181/createInsured?afm=084978592&amka=948358798&name=Ioannis&surname=Petridis&Birthdate=1997-05-05&email=ioannis1997@ihu.com
+    //http://localhost:8181/createInsured
     @PostMapping(path = "/createInsured")
     public String createInsured(@RequestBody Insured insured){
        return insuredService.createInsured(insured.getAfm(),

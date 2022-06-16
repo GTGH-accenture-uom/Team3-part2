@@ -66,4 +66,13 @@ public class VaccinationCenter implements Serializable {
         timeslots.add(timeslot);
         timeslot.getDoctor().addTimeslot(timeslot);
     }
+
+    public Timeslot getTimeslotByID(int timeslotId) {
+        for (Timeslot timeslot:timeslots) {
+            if (timeslot.getID().equals(timeslotId))
+                return timeslot;
+
+        }
+        return null;
+    }
 }

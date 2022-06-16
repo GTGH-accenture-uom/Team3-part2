@@ -136,6 +136,8 @@ public class VaccinationCenterService {
             return "Wrong arguments! Try again.";
         }
         else {
+                if (vaccinationCenter.getTimeslotByID(timeslotId)!=null)
+                    return "this center already has this timeslot";
                 vaccinationCenter.addTimeslot(timeslot);
             try {
                 FileParser.writeAll(this.getAllAsObjects());

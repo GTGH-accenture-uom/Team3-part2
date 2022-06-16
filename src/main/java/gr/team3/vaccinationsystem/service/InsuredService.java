@@ -37,13 +37,12 @@ public class InsuredService {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }else{
-                return "Amka is not valid";
+                return "Done!";
             }
-
         }
-
-        return "Done!";
+        else
+            return "Amka is not valid";
+        return null;
     }
 
 

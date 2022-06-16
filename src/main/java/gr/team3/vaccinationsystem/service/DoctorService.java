@@ -117,6 +117,7 @@ public class DoctorService {
         TimeslotService timeslotService = new TimeslotService();
         Timeslot timeslot = timeslotService.getTimeslotbyID(id);
         Doctor doctor = this.getDoctorByAmka(amka);
+
         if (timeslot == null || doctor == null) {
             return "Wrong arguments! Try again.";
         }
@@ -136,6 +137,15 @@ public class DoctorService {
         return  "Done!";
     }
 
-
+    public String getData(Doctor doctor) {
+        if (doctor==null)
+            return "";
+        else{
+            StringBuilder data= new StringBuilder();
+        data.append("amka: " +doctor.getAmka()+"  ");
+        data.append("name " + doctor.getName() + "  ");
+        data.append("surname: " + doctor.getSurname() + "  ");
+        return data.toString();}
+    }
 }
 

@@ -34,8 +34,8 @@ public class TimeslotController {
     //Get the list of all the timeslots
     //http://localhost:8181/timeslots
     @GetMapping(path = "/timeslots")
-    public List<Timeslot> getAllTimeslots(){
-        return timeslotService.getTimeslotList();
+    public List<String> getAllTimeslots(){
+        return timeslotService.getCustomTimeslotList();
     }
 
 
@@ -59,7 +59,7 @@ public class TimeslotController {
     //Shows the free timeslots of only that day
     //http://localhost:8181/SearchTimeslots
     @GetMapping(path = "/SearchTimeslots")
-    public List<Timeslot> SearchTimeslots(@RequestParam(name = "day") int day,
+    public List<String> SearchTimeslots(@RequestParam(name = "day") int day,
                                           @RequestParam(name= "month") int month,
                                           @RequestParam(name= "year") int year){
         return    timeslotService.getFreeTimeslots(day,month,year);
@@ -70,8 +70,8 @@ public class TimeslotController {
     //Shows the free timeslots of that whole month
     //http://localhost:8181/SearchTimeslotsByMonth
     @GetMapping(path = "/SearchTimeslotsByMonth")
-    public List<Timeslot> SearchTimeslotsByMonth(@RequestParam(name = "month") Integer month,
-                                                 @RequestParam(name = "year") Integer year){
+    public List<String> SearchTimeslotsByMonth(@RequestParam(name = "month") int month,
+                                                 @RequestParam(name = "year") int year){
         return timeslotService.getFreeTimeslotsByMonth(month,year);
     }
 

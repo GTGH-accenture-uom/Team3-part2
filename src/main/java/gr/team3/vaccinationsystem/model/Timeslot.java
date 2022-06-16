@@ -2,6 +2,7 @@ package gr.team3.vaccinationsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import gr.team3.vaccinationsystem.service.DoctorService;
+import gr.team3.vaccinationsystem.service.VaccinationCenterService;
 import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +28,6 @@ public class Timeslot implements Serializable {
     private boolean isFree;
 
 
-
     public Timeslot(int day, int month, int year, int hour, int minutes, int startMinute, int endMinute, Doctor doctor) {
         this.day = day;
         this.month = month;
@@ -42,7 +42,7 @@ public class Timeslot implements Serializable {
     }
 
 
-    public Timeslot(int day, int month, int year, int hour, int minutes, int startMinute, int endMinute,String amka) {
+    public Timeslot(int day, int month, int year, int hour, int minutes, int startMinute, int endMinute) {
         this.day = day;
         this.month = month;
         this.year = year;
@@ -51,9 +51,6 @@ public class Timeslot implements Serializable {
         this.startMinute = startMinute;
         this.endMinute = endMinute;
         isFree = true;
-        DoctorService doctorService = new DoctorService();
-        this.doctor=doctorService.getDoctorByAmka(amka);
-
     }
 
 
@@ -97,6 +94,7 @@ public class Timeslot implements Serializable {
 
     @Override
     public String toString() {
+        DoctorService doctorService = new DoctorService();
         return "Timeslot{" +
                 "ID=" + ID +
                 ", day=" + day +
@@ -106,7 +104,7 @@ public class Timeslot implements Serializable {
                 ", minutes=" + minutes +
                 ", startMinute=" + startMinute +
                 ", endMinute=" + endMinute +
-                ", doctor=" + doctor +
+                ", doctor=" + doctorService.getData(doctor) +
                 '}';
     }
 
@@ -123,6 +121,29 @@ public class Timeslot implements Serializable {
     }
 
     public boolean checkifDoctorisInTimeslot(Doctor doctor) {
-        return this.getDoctor().getAmka().equals(doctor.getAmka());
+        return this.getDoctor() != null && this.getDoctor().getAmka().equals(doctor.getAmka());
     }
+
+    public String getData() {
+        VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
+        StringBuilder data= new StringBuilder();
+        data.append("Date: " +this.getLocalDateWithTime().toString()+" ,");
+        data.append("ID: " +this.getID()+" ,");
+        data.append("start minute " + this.getStartMinute() + " ,");
+        data.append("end minute: " + this.getEndMinute() + " ,");
+        data.append("doctor: " + this.getDoctor().getData());
+
+        return data.toString();
+    }
+
+    public String getDataWithoutDoctor() {
+        VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
+        StringBuilder data= new StringBuilder();
+        data.append("Date: " +this.getLocalDateWithTime().toString()+" ,");
+        data.append("ID: " +this.getID()+" ,");
+        data.append("start minute " + this.getStartMinute() + " ,");
+        data.append("end minute: " + this.getEndMinute() + " ,");
+        return data.toString();
+    }
+
 }
