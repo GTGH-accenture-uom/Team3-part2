@@ -29,11 +29,7 @@ public class VaccinationService {
 
     //This method makes a vaccination
     public String makeVaccination(Reservation reservation, String expiration_date)  {
-        //check if vaccination already exists
-        for (Vaccination vacc:vaccinationslist) {
-            if (vacc.getInsuredPerson().equals(reservation.getInsuredPerson()))
-                return "vaccination already done!";
-        }
+       //check if vaccination already exists
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate exp_date = LocalDate.parse(expiration_date, formatter);
         if (exp_date.isBefore(reservation.getTimeslot().getLocalDate())){
@@ -101,6 +97,10 @@ public class VaccinationService {
     }
 
     public String checkData(Integer id, String amka, String exp_date) {
+        for (Vaccination vaccination:vaccinationslist) {
+            if (vaccination.getInsuredPerson().getAmka().equals(amka))
+                return "Insured with the given amka has already vaccinated";
+        }
         TimeslotService timeslotService = new TimeslotService();
         Timeslot timeslot = timeslotService.getTimeslotbyID(id);
         if (timeslot == null)

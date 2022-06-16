@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import gr.team3.vaccinationsystem.model.Timeslot;
 
+import java.io.File;
 import java.lang.management.GarbageCollectorMXBean;
 import java.time.LocalDate;
 import java.util.List;
@@ -40,12 +41,12 @@ public class AppConfig {
         return args -> {
 
           FileParser fileParser = new FileParser();
-
-          //           fileParser.writeAll(insuredService.getAllInsuredAsObjects());
+//                    fileParser.writeAll(insuredService.getAllInsuredAsObjects());
 //            fileParser.writeAll(doctorService.getAllDoctorsAsObjects());
 //            fileParser.writeAll(reservationService.getAllResAsObjects());
 //            fileParser.writeAll(timeslotService.getAllTimeslotsAsObjects());
 //            //fileParser.writeAll(vaccinationService.getAllAsObjects());
+
 
             List<Insured> list = fileParser.readInsured();
             insuredService.setInsuredList(list);
@@ -59,16 +60,18 @@ public class AppConfig {
                 System.out.println(doctor);
             }
 
-            List<Reservation> res_list = fileParser.readReservations();
-            reservationService.setReservationList(res_list);
-            for (Reservation reservation: reservationService.getReservations()) {
-                System.out.println(reservation);
-            }
+
 
             List<Timeslot> timeslots = fileParser.readTimeslots();
             timeslotService.setTimeslotList(timeslots);
             for (Timeslot timeslot: timeslotService.getTimeslotList()) {
                 System.out.println(timeslot);
+            }
+
+            List<Reservation> res_list = fileParser.readReservations();
+            reservationService.setReservationList(res_list);
+            for (Reservation reservation: reservationService.getReservations()) {
+                System.out.println(reservation);
             }
 
             List<Vaccination> vaccinations = fileParser.readVaccinations();

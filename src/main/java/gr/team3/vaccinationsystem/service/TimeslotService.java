@@ -31,29 +31,28 @@ public class TimeslotService {
         return timeslotList;
     }
 
-    public void setTimeslotList(List<Timeslot> timeslotList) {
-        TimeslotService.timeslotList = timeslotList;
+    public void setTimeslotList(List<Timeslot> list) {
+        timeslotList = list;
     }
 
 
     //This is a method that gets all the free timeslots by day, month and year
-    public  List<Timeslot> getFreeTimeslots(int day, int month, int year) {
-        List<Timeslot> freeTimeslots = new ArrayList<>();
+    public  List<String> getFreeTimeslots(int day, int month, int year) {
+        List<String> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
-            if ((timeslot.getDay() == day) &&  (timeslot.getMonth() == month) &&  (timeslot.getYear() == year && timeslot.isFree())) {
-                freeTimeslots.add(timeslot);
-            }
+            if ((timeslot.getDay() == day) &&  (timeslot.getMonth() == month) &&  (timeslot.getYear() == year && timeslot.isFree()) && timeslot.getDoctor()!=null) {
+                freeTimeslots.add(timeslot.getData());            }
         }
         return freeTimeslots;
     }
 
 
     //This is a method that gets all the free timeslots by month and year
-    public  List<Timeslot> getFreeTimeslotsByMonth(int month, int year) {
-        List<Timeslot> freeTimeslots = new ArrayList<>();
+    public  List<String> getFreeTimeslotsByMonth(int month, int year) {
+        List<String> freeTimeslots = new ArrayList<>();
         for (Timeslot timeslot: timeslotList) {
-            if ((timeslot.getMonth() == month) &&  (timeslot.getYear() == year) && timeslot.isFree()) {
-                freeTimeslots.add(timeslot);
+            if ((timeslot.getMonth() == month) &&  (timeslot.getYear() == year) && timeslot.isFree() && timeslot.getDoctor()!=null) {
+                freeTimeslots.add(timeslot.getData());
             }
         }
         return freeTimeslots;
@@ -62,9 +61,14 @@ public class TimeslotService {
 
     //This method adds all timeslots in the list
     public String addTimeslot(Timeslot timeslot){
+        timeslot.setFree(true);
         if (timeslot.getLocalDate().isBefore(LocalDate.now()))
                 return "Invalid date";
-        timeslot.setID(ID++);
+
+        if (timeslotList.size() == 0)
+            timeslot.setID(0);
+        else
+            timeslot.setID((Integer) this.getTimeslotList().get(timeslotList.size()-1).getID()+1);
         timeslotList.add(timeslot);
         try {
             FileParser.writeAll(this.getAllTimeslotsAsObjects());
@@ -138,6 +142,17 @@ public class TimeslotService {
     }
 
 
-
-
+    public List<String> getCustomTimeslotList() {
+        List<String> AllTimeslots = new ArrayList<>();
+        VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
+        for (Timeslot timeslot : timeslotList) {
+            if (timeslot.getDoctor() != null) {
+                AllTimeslots.add(timeslot.getData());
+            }
+            else {
+                AllTimeslots.add(timeslot.getDataWithoutDoctor());
+            }
+        }
+        return AllTimeslots;
+    }
 }

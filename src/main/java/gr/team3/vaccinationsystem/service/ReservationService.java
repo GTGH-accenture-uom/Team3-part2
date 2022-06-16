@@ -60,7 +60,7 @@ public class ReservationService {
 
     //Deletes a reservation
     public void deleteReservation(Insured insured) {
-
+        //this returns null
         Reservation reservation = this.getReservationByAmka(insured.getAmka());
         reservation.getTimeslot().setFree(true);
         reservationList.remove(reservation);
@@ -166,6 +166,7 @@ public class ReservationService {
 
     //Gets a reservation using the insured's amka
     public Reservation getReservationByAmka(String amka) {
+        System.out.println(reservationList);
         for (Reservation reservation : reservationList) {
             if (reservation.getInsuredPerson().getAmka().equals(amka)) {
                 return reservation;
@@ -262,8 +263,11 @@ public class ReservationService {
         Timeslot timeslot = timeslotService.getTimeslotbyID(ID);
         if (timeslot == null)
             return "there is not such timeslot";
+        VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
+        if (vaccinationCenterService.getCenterByTimeslot(timeslot) == null)
+            return "This timeslot does not belong to a center.";
         System.out.println(timeslot);
-        if (! timeslot.checkifDoctorisInTimeslot(doctor))
+        if (!timeslot.checkifDoctorisInTimeslot(doctor))
             return  "this Doctor does not belong to the given Timeslot";
         return "";
     }
@@ -275,6 +279,13 @@ public class ReservationService {
             customList.add(reservation.getData());
         }
         return customList;
+    }
+
+    public boolean checkIfHasReservation(String amka) {
+        for (Reservation res:reservationList)
+            if (res.getInsuredPerson().getAmka().equals(amka)){
+                    return true;}
+        return false;
     }
 }
 

@@ -52,7 +52,7 @@ public class ReservationController {
     calling changeReservation() and createReservation method()
      */
     //http://localhost:8181/changeReservation?amka=22024204689&timeslot=2022-06-12 02:00&doctor_name=Panagiotis&doctor_surname=Panagiotidis
-    @PostMapping(path = "/changeReservation")
+    @PutMapping(path = "/changeReservation")
     public String changeReservation(@RequestParam (name = "amka") String amka,
                                     @RequestParam(name = "timeslot") Integer ID,
                                     @RequestParam(name = "doctor_name") String doctor_name,
@@ -60,6 +60,8 @@ public class ReservationController {
 
         String message = reservationService.checkAllData(amka,ID,doctor_name,doctor_surname);
         if (message.equals("")){
+            if (!reservationService.checkIfHasReservation(amka))
+                return "There is no reservation with this amka";
             reservationService.changeReservation(amka);
             reservationService.createReservation(amka,ID);
             return "reservation updated!";
@@ -71,7 +73,7 @@ public class ReservationController {
 
 
     //Delete a reservation by amka
-    //http//localhost:8181/deleteReservation?amka=22024204689
+    //http//localhost:8181/deleteReservationByAmka?amka=22024204689
     @DeleteMapping(path = "/deleteReservationByAmka")
     public String deleteReservationByAmka(@RequestParam(name = "amka") String amka){
         return reservationService.deleteReservationByAmka(amka);
@@ -82,7 +84,6 @@ public class ReservationController {
     //http://localhost:8181/reservationList
     @GetMapping(path = "/reservationList")
     public List<String> getReservations(){
-        System.out.println(reservationService.getReservations());
         return reservationService.getCustomReservationList();
     }
 

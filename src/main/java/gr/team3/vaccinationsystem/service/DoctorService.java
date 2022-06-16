@@ -72,7 +72,7 @@ public class DoctorService {
     //Gets doctor by amka
     public  Doctor getDoctorByAmka(String amka) {
         for (Doctor doctor:doctorsList) {
-            if ( doctor.getSurname().equals(amka))
+            if ( doctor.getAmka().equals(amka))
                 return doctor;
         }
         return null;
@@ -83,7 +83,7 @@ public class DoctorService {
     public List<Doctor> getDoctorByName(String name) {
         List<Doctor> doctors = new ArrayList<>();
         for (Doctor doctor : doctorsList) {
-            if ( doctor.getSurname().equals(name))
+            if ( doctor.getName().equals(name))
                 doctors.add(doctor);
         }
         return doctors;
@@ -117,6 +117,7 @@ public class DoctorService {
         TimeslotService timeslotService = new TimeslotService();
         Timeslot timeslot = timeslotService.getTimeslotbyID(id);
         Doctor doctor = this.getDoctorByAmka(amka);
+
         if (timeslot == null || doctor == null) {
             return "Wrong arguments! Try again.";
         }
@@ -125,6 +126,7 @@ public class DoctorService {
                 return "This timeslot already has a doctor assigned";
             }else {
                 timeslot.setDoctor(doctor);
+                doctor.addTimeslot(timeslot);
                 try {
                     FileParser.writeAll(timeslotService.getAllTimeslotsAsObjects());
                 } catch (IOException e) {
@@ -135,6 +137,15 @@ public class DoctorService {
         return  "Done!";
     }
 
-
+    public String getData(Doctor doctor) {
+        if (doctor==null)
+            return "";
+        else{
+            StringBuilder data= new StringBuilder();
+        data.append("amka: " +doctor.getAmka()+"  ");
+        data.append("name " + doctor.getName() + "  ");
+        data.append("surname: " + doctor.getSurname() + "  ");
+        return data.toString();}
+    }
 }
 
