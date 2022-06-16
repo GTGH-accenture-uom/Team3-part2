@@ -129,7 +129,8 @@ public class Timeslot implements Serializable {
         StringBuilder data= new StringBuilder();
         data.append("Date: " +this.getLocalDateWithTime().toString()+" ,");
         data.append("ID: " +this.getID()+" ,");
-        data.append("start minute " + this.getStartMinute() + " ,");
+        data.append("Is Available: " + this.isFree + " ,");
+        data.append("start minute: " + this.getStartMinute() + " ,");
         data.append("end minute: " + this.getEndMinute() + " ,");
         data.append("doctor: " + this.getDoctor().getData());
 
