@@ -42,8 +42,8 @@ public class ReservationService {
         Insured insured = new InsuredService().getInsuredByAmka(amka);
         Timeslot timeslot = timeslotService.getTimeslotbyID(ID);
         if (timeslot.isFree()) {
-            reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, new VaccinationCenterService().getCenterByTimeslot(timeslot)));
             timeslot.setFree(false);
+            reservationList.add(new Reservation(insured, timeslot.getDoctor(), timeslot, new VaccinationCenterService().getCenterByTimeslotID(timeslot.getID())));
             insured.increaseResCount();
             try {
                 FileParser.writeAll(this.getAllResAsObjects());
@@ -266,7 +266,7 @@ public class ReservationService {
         if (timeslot == null)
             return "there is not such timeslot";
         VaccinationCenterService vaccinationCenterService = new VaccinationCenterService();
-        if (vaccinationCenterService.getCenterByTimeslot(timeslot) == null)
+        if (vaccinationCenterService.getCenterByTimeslotID(timeslot.getID()) == null)
             return "This timeslot does not belong to a center.";
         System.out.println(timeslot);
         if (!timeslot.checkifDoctorisInTimeslot(doctor))

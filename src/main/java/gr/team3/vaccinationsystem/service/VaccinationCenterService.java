@@ -89,10 +89,10 @@ public class VaccinationCenterService {
 
     //This method returns the vaccination center with the specific timeslot
 
-    public VaccinationCenter getCenterByTimeslot(Timeslot timeslot) {
+    public VaccinationCenter getCenterByTimeslotID(Integer id) {
         for (VaccinationCenter vaccinationCenter:vaccinationCenterList) {
             for (Timeslot t:vaccinationCenter.getTimeslots()) {
-                if (t.equals(timeslot))
+                if (t.getID().equals(id))
                     return vaccinationCenter;
             }
         }

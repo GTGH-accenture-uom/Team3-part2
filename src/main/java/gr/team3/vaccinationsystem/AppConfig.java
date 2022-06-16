@@ -68,11 +68,11 @@ public class AppConfig {
                 System.out.println(timeslot);
             }
 
-            List<Reservation> res_list = fileParser.readReservations();
-            reservationService.setReservationList(res_list);
-            for (Reservation reservation: reservationService.getReservations()) {
-                System.out.println(reservation);
-            }
+//            List<Reservation> res_list = fileParser.readReservations();
+//            reservationService.setReservationList(res_list);
+//            for (Reservation reservation: reservationService.getReservations()) {
+//                System.out.println(reservation);
+//            }
 
             List<Vaccination> vaccinations = fileParser.readVaccinations();
             vaccinationService.setVaccinationList(vaccinations);

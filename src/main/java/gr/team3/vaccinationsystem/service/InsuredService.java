@@ -107,24 +107,26 @@ public class InsuredService {
     //or not  and the expiration date depending on the vaccination they had.It
     //also checks and prints if the insured has a vaccination record
     public  String checkHasCoverage(String amka) {
+
         Insured insured = getInsuredByAmka(amka);
         VaccinationService vaccinationService = new VaccinationService();
+        System.out.println(vaccinationService.getVaccinationslist());
         if (insured == null) {
             return "The insured with the given amka doesn't exist";
         }
         else
-            {
-                for (Vaccination vaccination1 : vaccinationService.getVaccinationslist()) {
-                    if (vaccination1.getInsuredPerson().equals(insured)) {
-                        if ((vaccination1.getExpirationDate().isAfter(LocalDate.now()))) {
-                            return ("Your vaccination certificate is still valid! It expires at " + vaccination1.getExpirationDate());
-                        } else
-                            return "Your vaccination coverage has expired!";
-                    }
+            {   Vaccination vaccination = vaccinationService.getVaccinationbyAmka(insured.getAmka());
+                if (vaccination!=null){
+               if (vaccination.getExpirationDate().isAfter(LocalDate.now()))
+                   return ("Your vaccination certificate is still valid! It expires at " + vaccination.getExpirationDate());
+               else
+                   return "Your vaccination coverage has expired!";
                 }
-                return "No vaccination record found!";
+        return "no vaccination record found";
             }
         }
+
+
 
 
     //Deletes an insured that already exists using the insured amka
