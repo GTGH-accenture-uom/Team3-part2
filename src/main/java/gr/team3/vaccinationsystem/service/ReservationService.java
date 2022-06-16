@@ -184,7 +184,9 @@ public class ReservationService {
     //Gets a reservation using the insured's amka and the timeslot
     public Reservation getReservationByAmkaAndTimeslot(String amka, Timeslot timeslot) {
        Reservation t1 = this.getReservationByTimeslotID(timeslot.getID());
+        System.out.println(t1);
        Reservation t2 = this.getReservationByAmka(amka);
+        System.out.println(t2);
        if (t1 == null || t2 == null)
            return null;
        if (t1.equals(t2))
