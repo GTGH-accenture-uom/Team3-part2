@@ -82,9 +82,9 @@ public class Reservation implements Serializable {
     public String getData(){
         StringBuilder data= new StringBuilder();
         data.append("amka: " +insuredPerson.getAmka()+"  ");
-        data.append("date and time: " +timeslot.getLocalDateWithTime()+"  ");
+        data.append("date and time: " +timeslot.getLocalDateWithTime().toString()+"  ");
+        data.append("ID: " + timeslot.getID() + " ");
         data.append("doctor: " +doctor.getName()+" "+doctor.getSurname()+"  ");
-        data.append("vaccination center: " +vaccinationCenter.getCode());
         return data.toString();
     }
 
